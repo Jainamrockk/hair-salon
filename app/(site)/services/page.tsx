@@ -1,14 +1,15 @@
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import HairSwatch from "@/components/hair/HairSwatch";
-import { CATEGORIES, CATEGORY_PHOTO, SALON } from "@/lib/content";
+import { CATEGORIES, SALON } from "@/lib/content";
+import { categoryPhoto, getPhotos } from "@/lib/photos";
 import { getServices } from "@/lib/data";
 import { fmtDuration, money } from "@/lib/time";
 
 export const metadata = { title: "Services & prices" };
 
 export default async function Services() {
-  const services = await getServices();
+  const [services, photos] = await Promise.all([getServices(), getPhotos()]);
   return (
     <>
       <PageHero eyebrow="Services" title={<>Services <em>&amp;</em> prices.</>} lead="Every price, up front. “And up” depends on hair length and how much color is needed — Lee will tell you the exact price before starting." />
@@ -36,7 +37,7 @@ export default async function Services() {
               <section key={c.id} id={c.id} className="scroll-mt-28">
                 <div className="relative mb-8 overflow-hidden rounded-[24px] ring-1 ring-noir/10 min-h-[220px] md:min-h-[260px] flex items-end">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={CATEGORY_PHOTO[c.id]} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+                  <img src={categoryPhoto(photos, c.id)} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-r from-[#15110f] via-[#15110f]/75 to-transparent" />
                   <HairSwatch id={`s-${c.id}`} hex={c.hex} code={c.shade} className="absolute right-6 md:right-10 top-0 h-[92%] drop-shadow-[0_10px_20px_rgba(0,0,0,.5)]" />
                   <div className="relative p-7 md:p-9 text-[#f0eae1]">

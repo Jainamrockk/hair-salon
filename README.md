@@ -16,6 +16,15 @@ Premium website, online booking and owner app for **Salon Ché** (Lee Ortivez, 5
 | Owner app | `/owner` today, calendar and block time, new appointment, appointment (take payment, tip, move, no-show), clients and profiles, messages, requests and waitlist, reviews, earnings, orders and stock, hours, prices, booking rules, salon settings, **edit website by text** with undo |
 | Proposal | `/features`: every add-on and its price |
 
+### Photos
+Owner → **Photos** (`/owner/photos`) changes every photo on the site without code:
+- **Site photos**: the 3 hero arches, Meet Lee, About page portrait and the salon room, and one banner photo per service category. Each one can be changed or reset to the original.
+- **Work gallery** and **Homepage reel**: add, caption, set a category, reorder or remove photos, then publish.
+- **Shop products**: change each product's photo.
+- **Library**: your uploads and the built-in photos. A photo that is still used on the site can't be deleted.
+
+Uploads are resized in the browser (longest side 1800px, JPEG) and stored in Postgres. They are served from `/api/media/:id` with long-term caching, so no extra storage service is needed. The built-in photos live in `public/photos/` (Unsplash licence).
+
 ### Add-on price tags
 The premium base website is one price. **Every feature beyond it has an `Add-on · $X` tag** wherever it appears on the site. All prices are in one file, `lib/features.ts`. To hide the tags once the client has chosen, set `NEXT_PUBLIC_SHOW_PRICE_TAGS=false`.
 

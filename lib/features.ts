@@ -39,6 +39,7 @@ export const FEATURES: Feature[] = [
   { id: "owner-app", name: "Owner app — day, calendar & clients", price: 600, group: "Owner", summary: "Today view, calendar, new appointments, block time, client profiles and notes.", where: ["/owner"] },
   { id: "earnings", name: "Earnings & payout reports", price: 200, group: "Owner", summary: "Booked today, this week vs last, day-by-day table and payouts.", where: ["/owner/money"] },
   { id: "setup", name: "Self-serve setup (hours, prices, rules)", price: 220, group: "Owner", summary: "Lee edits hours, the price list, deposit and cancellation rules without a developer.", where: ["/owner/hours", "/owner/menu", "/owner/rules"] },
+  { id: "photo-manager", name: "Photo manager", price: 250, group: "Owner", summary: "Upload from phone or computer, place photos anywhere on the site (hero, services, Meet Lee, gallery, reel, shop) and reset any time.", where: ["/owner/photos"] },
   { id: "edit-by-text", name: "Edit the website by text", price: 300, group: "Smart", summary: "“Change Thursday hours to 10–1” — drafted, previewed and published in one tap, with undo.", where: ["/owner/website"] },
 ];
 

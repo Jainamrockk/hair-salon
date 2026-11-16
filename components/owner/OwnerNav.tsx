@@ -7,7 +7,7 @@ import { ownerSignOut } from "@/app/actions";
 
 type Counts = { msgs: number; reqs: number; revs: number; orders: number };
 const GROUPS = (c: Counts) => [
-  { title: "", items: [["/owner", "Today", 0], ["/owner/calendar", "Calendar", 0], ["/owner/clients", "Clients", 0], ["/owner/messages", "Messages", c.msgs], ["/owner/website", "Website", 0]] },
+  { title: "", items: [["/owner", "Today", 0], ["/owner/calendar", "Calendar", 0], ["/owner/clients", "Clients", 0], ["/owner/messages", "Messages", c.msgs], ["/owner/website", "Website", 0], ["/owner/photos", "Photos", 0]] },
   { title: "Business", items: [["/owner/requests", "Requests", c.reqs], ["/owner/reviews", "Reviews", c.revs], ["/owner/money", "Earnings", 0], ["/owner/orders", "Orders", c.orders]] },
   { title: "Setup", items: [["/owner/hours", "Hours", 0], ["/owner/menu", "Prices", 0], ["/owner/rules", "Booking rules", 0], ["/owner/settings", "Salon settings", 0]] },
 ] as const;

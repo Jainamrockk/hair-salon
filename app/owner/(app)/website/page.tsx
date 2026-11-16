@@ -21,7 +21,7 @@ export default async function Website() {
           <Panel className="p-6">
             <p className="font-display text-2xl">Quick edits</p>
             <div className="grid sm:grid-cols-4 gap-3 mt-4">
-              {[["/owner/hours", "Hours"], ["/owner/menu", "Prices"], ["/owner/settings", "Top-bar note"], ["/owner/settings", "Homepage text"]].map(([h, l]) => <Link key={l} href={h} className="rounded-2xl border border-sand p-4 hover:border-noir font-semibold">{l} →</Link>)}
+              {[["/owner/photos", "Photos"], ["/owner/hours", "Hours"], ["/owner/menu", "Prices"], ["/owner/settings", "Homepage text"]].map(([h, l]) => <Link key={l} href={h} className="rounded-2xl border border-sand p-4 hover:border-noir font-semibold">{l} →</Link>)}
             </div>
           </Panel>
           <Panel className="p-6 bg-noir text-ivory border-noir">

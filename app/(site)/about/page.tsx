@@ -1,12 +1,13 @@
 import Link from "next/link";
 import Img from "@/components/Img";
-import { IMG, SALON } from "@/lib/content";
+import { SALON } from "@/lib/content";
+import { getPhotos } from "@/lib/photos";
 import { getSite } from "@/lib/data";
 
 export const metadata = { title: "Meet Lee Ortivez" };
 
 export default async function About() {
-  const site = await getSite();
+  const [site, photos] = await Promise.all([getSite(), getPhotos()]);
   return (
     <>
       <section className="container-x pt-16 md:pt-24 pb-20 grid lg:grid-cols-2 gap-14 items-center">
@@ -17,7 +18,7 @@ export default async function About() {
           <blockquote className="mt-10 border-l-2 border-gold pl-6 font-display text-3xl leading-snug">“{SALON.quote}”</blockquote>
           <div className="mt-10 flex flex-wrap gap-3"><Link href="/book" className="btn-dark">Book with Lee</Link><Link href="/work" className="btn-ghost">See Lee&apos;s work</Link></div>
         </div>
-        <div className="niche plinth overflow-hidden ring-1 ring-gold/20 mx-auto w-full max-w-[520px]"><Img src={IMG.curls} alt="Curling-iron waves being set at the chair" className="w-full aspect-[3/4]" label="At the chair" /></div>
+        <div className="niche plinth overflow-hidden ring-1 ring-gold/20 mx-auto w-full max-w-[520px]"><Img src={photos.about} alt="Curling-iron waves being set at the chair" className="w-full aspect-[3/4]" label="At the chair" /></div>
       </section>
       <section className="border-y border-noir/10 bg-cream">
         <div className="container-x py-16 grid grid-cols-2 lg:grid-cols-4 gap-8">
@@ -39,7 +40,7 @@ export default async function About() {
         </div>
       </section>
       <section className="container-x pb-28 grid lg:grid-cols-12 gap-10 items-center">
-        <div className="lg:col-span-7 niche plinth overflow-hidden"><Img src={IMG.interior} alt="The chair, mirror and colour bar" className="w-full aspect-[16/11]" /></div>
+        <div className="lg:col-span-7 niche plinth overflow-hidden"><Img src={photos.interior} alt="The chair, mirror and colour bar" className="w-full aspect-[16/11]" /></div>
         <div className="lg:col-span-5">
           <p className="eyebrow-gold mb-4">The space</p>
           <h2 className="font-display text-5xl font-light">A calm room on <em>Almond Street.</em></h2>

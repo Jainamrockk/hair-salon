@@ -4,16 +4,11 @@ import FeatureTag from "@/components/FeatureTag";
 import Hero from "@/components/home/Hero";
 import { Reveal, SplitWords } from "@/components/ui/reveal";
 import HairSwatch from "@/components/hair/HairSwatch";
-import { CATEGORIES, CATEGORY_PHOTO, IMG, SALON, directionsUrl, mapEmbedUrl } from "@/lib/content";
+import { CATEGORIES, SALON, directionsUrl, mapEmbedUrl } from "@/lib/content";
 import { getHours, getServices, getSite, nextOpenings } from "@/lib/data";
+import { categoryPhoto, getPhotos, getReel, getWork } from "@/lib/photos";
 import { q } from "@/lib/db";
 import { fmtDateStr, fmtMin, hhmmToMin, localDate, money, weekdayKey } from "@/lib/time";
-
-const REEL: [string, string][] = [
-  [IMG.blowdry, "Round-brush blow dry"], [IMG.rainbow, "Vivid colour melt"], [IMG.barberCut, "Scissor-over-comb"], [IMG.styling, "Pin-curl set"],
-  [IMG.natural, "Natural texture"], [IMG.pinkFlip, "Rose-gold pink"], [IMG.curls, "Iron curls"], [IMG.barberBlow, "Barber blow-out"],
-  [IMG.updo, "Braided updo"], [IMG.silverWash, "Silver toning wash"],
-];
 
 const DAY_NAME: Record<string, string> = { mon: "Monday", tue: "Tuesday", wed: "Wednesday", thu: "Thursday", fri: "Friday", sat: "Saturday", sun: "Sunday" };
 const VISITS = [
@@ -23,11 +18,13 @@ const VISITS = [
 ];
 
 export default async function Home() {
-  const [site, services, openings, hours, reviews, products] = await Promise.all([
+  const [site, services, openings, hours, reviews, products, photos, reelItems, work] = await Promise.all([
     getSite(), getServices(), nextOpenings(3), getHours(),
     q<{ id: number; author: string; rating: number; body: string; service: string }>(`SELECT * FROM reviews ORDER BY rating DESC, created_at DESC LIMIT 3`),
     q<{ slug: string; brand: string; name: string; price_cents: number; image: string }>(`SELECT slug, brand, name, price_cents, image FROM products ORDER BY id LIMIT 4`),
+    getPhotos(), getReel(), getWork(),
   ]);
+  const REEL = reelItems.map((r) => [r.src, r.title] as const);
   const from: Record<string, number> = {};
   for (const s of services) from[s.category] = Math.min(from[s.category] ?? 1e9, s.price_cents);
   const today = weekdayKey(localDate());
@@ -38,7 +35,7 @@ export default async function Home() {
   return (
     <>
       <Hero title={site.heroTitle} lead={site.heroLead} tag={<FeatureTag id="booking" />}
-        shots={[{ src: IMG.color, alt: "Long lavender waves", label: "Creative colour" }, { src: IMG.blonde, alt: "Soft balayage waves from behind", label: "Lived-in blonde" }, { src: IMG.fade, alt: "A fresh skin fade with a beard line-up", label: "Barber" }]}
+        shots={[{ src: photos.hero1, alt: "A colour look from the chair", label: "Creative colour" }, { src: photos.hero2, alt: "Signature hair from Salon Ché", label: "Lived-in blonde" }, { src: photos.hero3, alt: "A fresh barber cut", label: "Barber" }]}
         openings={openings.map((o) => ({ href: `/book?date=${o.date}&t=${o.min}`, day: fmtDateStr(o.date, { weekday: "short", month: "short", day: "numeric" }), time: fmtMin(o.min) }))} />
 
       {/* Ticker, like the metal-price band on the flagship */}
@@ -70,7 +67,7 @@ export default async function Home() {
                   <div className="niche plinth relative aspect-[3/4] overflow-hidden">
                     <div className="absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={CATEGORY_PHOTO[c.id]} alt="" className="h-full w-full object-cover opacity-40" />
+                      <img src={categoryPhoto(photos, c.id)} alt="" className="h-full w-full object-cover opacity-40" />
                     </div>
                     <HairSwatch id={c.id} hex={c.hex} code={c.shade} className="absolute left-1/2 top-[4%] h-[86%] -translate-x-1/2 origin-top transition-transform duration-[1200ms] ease-luxe group-hover:rotate-[4deg]" />
                     <span className="absolute inset-x-0 bottom-4 text-center text-xs tracking-[0.2em] uppercase text-[#f0e6d6]/80">{c.shadeName}</span>
@@ -131,7 +128,7 @@ export default async function Home() {
       <section className="relative overflow-hidden bg-[radial-gradient(ellipse_60%_70%_at_30%_50%,#3a2418_0%,#0d0907_100%)]">
         <div className="container-x grid min-h-[90svh] items-center gap-14 py-28 lg:grid-cols-[1fr_1.1fr]">
           <Reveal className="relative mx-auto w-full max-w-[460px]">
-            <div className="niche plinth overflow-hidden ring-1 ring-gold/20"><Img src={IMG.blowdry} alt="A round-brush blow dry at Lee's chair" className="w-full aspect-[3/4]" label="At the chair" /></div>
+            <div className="niche plinth overflow-hidden ring-1 ring-gold/20"><Img src={photos.lee} alt="Lee at the chair" className="w-full aspect-[3/4]" label="At the chair" /></div>
             <div className="absolute -bottom-6 -right-2 md:-right-8 glass rounded-full h-36 w-36 grid place-items-center text-center">
               <div><p className="font-display text-5xl leading-none text-gold-light">{SALON.years}</p><p className="text-[11px] text-taupe mt-1">years behind<br />the chair</p></div>
             </div>
@@ -168,7 +165,7 @@ export default async function Home() {
         <div className="container-x py-32 md:py-40">
           <div className="flex items-end justify-between gap-6"><Reveal><h2 className="h2">Fresh from the chair.</h2></Reveal><Link href="/work" className="link-arrow hidden sm:inline-flex">All work <span aria-hidden>→</span></Link></div>
           <div className="mt-16 grid grid-cols-2 gap-6 md:grid-cols-5">
-            {[[IMG.color, "Lavender waves", "color"], [IMG.blonde, "Lived-in balayage", "highlights"], [IMG.barber, "Fade & curl texture", "him"], [IMG.curls, "Iron curls", "cuts"], [IMG.natural, "Natural shape", "cuts"]].map(([src, t, cat], i) => (
+            {work.slice(0, 5).map((w) => [w.src, w.title, w.s || "cuts"]).map(([src, t, cat], i) => (
               <Reveal key={t} delay={i * 0.08} className={i === 4 ? "hidden md:block" : ""}>
                 <Link href={`/book?cat=${cat}`} className="group block">
                   <div className="niche overflow-hidden"><Img src={src} alt={t} className="w-full aspect-[3/4.4] transition-transform duration-[1200ms] ease-luxe group-hover:scale-105" /></div>
