@@ -48,19 +48,42 @@ export const DAY_LABEL: Record<string, string> = {
   sun: "Sunday", mon: "Monday", tue: "Tuesday", wed: "Wednesday", thu: "Thursday", fri: "Friday", sat: "Saturday",
 };
 
-// Curated imagery (Unsplash, free licence). Swap for Lee's own shot list (P-01 … P-12) when ready.
-const u = (id: string, w = 1600) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`;
+// Salon photography, bundled in /public/photos (Unsplash licence) so it always loads. Swap for Lee's own shots when ready.
+const ph = (n: string) => `/photos/${n}.jpg`;
 export const IMG = {
-  hero: u("photo-1560066984-138dadb4c035", 2000),
-  chair: u("photo-1521590832167-7bcbfaa6381f"),
-  color: u("photo-1562322140-8baeececf3df"),
-  styling: u("photo-1522337360788-8b13dee7a37e"),
-  barber: u("photo-1503951914875-452162b0f3f1"),
-  products: u("photo-1580618672591-eb180b1a973f"),
-  interior: u("photo-1600948836101-f9ffda59d250"),
-  wash: u("photo-1527799820374-dcf8d9d4a388"),
-  portrait: u("photo-1595476108010-b4d1f102b1b1"),
-  curls: u("photo-1519699047748-de8e457a634e"),
-  blonde: u("photo-1605497788044-5a32c7078486"),
-  tools: u("photo-1599351431202-1e0f0137899a"),
+  hero: ph("balayage"),
+  chair: ph("salon-chair"),
+  color: ph("lavender"),
+  styling: ph("pin-curls"),
+  barber: ph("barber-fade"),
+  products: ph("brush-products"),
+  interior: ph("salon-dark"),
+  wash: ph("shampoo"),
+  portrait: ph("stylist-smile"),
+  curls: ph("curling"),
+  blonde: ph("balayage"),
+  tools: ph("brushes"),
+  blowdry: ph("blowdry"),
+  rainbow: ph("rainbow"),
+  pinkFlip: ph("pink-flip"),
+  natural: ph("natural-curls"),
+  curlySmile: ph("curly-smile"),
+  fade: ph("fade"),
+  barberCut: ph("barber-cut"),
+  barberBlow: ph("barber-blowdry"),
+  barbershop: ph("barbershop"),
+  pompadour: ph("pompadour"),
+  beard: ph("beard-shave"),
+  updo: ph("updo"),
+  silverWash: ph("silver-wash"),
+  dryer: ph("dryer"),
+  stylistTools: ph("stylist-tools"),
+  barberTools: ph("barber-tools"),
+  salonWhite: ph("salon-white"),
+};
+
+/** One photograph per service family, used on the menu and in booking. */
+export const CATEGORY_PHOTO: Record<string, string> = {
+  cuts: IMG.blowdry, color: IMG.color, highlights: IMG.blonde, perms: IMG.curls,
+  smoothing: IMG.portrait, treatments: IMG.silverWash, waxing: IMG.tools, him: IMG.barber,
 };

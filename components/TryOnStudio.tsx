@@ -5,7 +5,7 @@ import { SHADES } from "@/lib/shades";
 import { saveLook } from "@/app/actions";
 
 type Area = "all" | "highlights" | "roots";
-const SAMPLE = "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80";
+const SAMPLE = "/photos/curly-smile.jpg";
 const hex2rgb = (h: string) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
 
 export default function TryOnStudio() {

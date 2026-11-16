@@ -5,15 +5,21 @@ import { IMG } from "@/lib/content";
 
 export const metadata = { title: "Work" };
 const WORK = [
-  { src: IMG.color, t: "All-over copper", cat: "Color", s: "color" },
-  { src: IMG.blonde, t: "Two-color highlights", cat: "Highlights", s: "highlights" },
-  { src: IMG.barber, t: "Men's cut & beard trim", cat: "For him", s: "him" },
-  { src: IMG.curls, t: "Soft perm", cat: "Perms", s: "perms" },
-  { src: IMG.styling, t: "Evening updo", cat: "Cuts & styling", s: "cuts" },
+  { src: IMG.color, t: "Lavender waves", cat: "Color", s: "color" },
+  { src: IMG.blonde, t: "Lived-in balayage", cat: "Highlights", s: "highlights" },
+  { src: IMG.barber, t: "Fade & curl texture", cat: "For him", s: "him" },
+  { src: IMG.curls, t: "Iron curls", cat: "Cuts & styling", s: "cuts" },
+  { src: IMG.styling, t: "Pin-curl set", cat: "Cuts & styling", s: "cuts" },
+  { src: IMG.rainbow, t: "Vivid colour melt", cat: "Color", s: "color" },
+  { src: IMG.fade, t: "Skin fade & beard line-up", cat: "For him", s: "him" },
+  { src: IMG.silverWash, t: "Silver toning wash", cat: "Treatments", s: "treatments" },
+  { src: IMG.pinkFlip, t: "Rose-gold pink", cat: "Color", s: "color" },
+  { src: IMG.natural, t: "Natural texture, shaped", cat: "Cuts & styling", s: "cuts" },
+  { src: IMG.updo, t: "Braided updo", cat: "Cuts & styling", s: "cuts" },
+  { src: IMG.pompadour, t: "Classic pompadour", cat: "For him", s: "him" },
+  { src: IMG.blowdry, t: "Round-brush blow dry", cat: "Cuts & styling", s: "cuts" },
+  { src: IMG.barberCut, t: "Scissor-over-comb", cat: "For him", s: "him" },
   { src: IMG.wash, t: "Botanical deep conditioning", cat: "Treatments", s: "treatments" },
-  { src: IMG.chair, t: "Precision bob", cat: "Cuts & styling", s: "cuts" },
-  { src: IMG.tools, t: "Keratin smoothing", cat: "Smoothing", s: "smoothing" },
-  { src: IMG.hero, t: "Gloss & blow dry", cat: "Color", s: "color" },
 ];
 export default async function Work({ searchParams }: { searchParams: Promise<{ c?: string }> }) {
   const { c } = await searchParams;

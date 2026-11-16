@@ -17,7 +17,7 @@ export default async function About() {
           <blockquote className="mt-10 border-l-2 border-gold pl-6 font-display text-3xl leading-snug">“{SALON.quote}”</blockquote>
           <div className="mt-10 flex flex-wrap gap-3"><Link href="/book" className="btn-dark">Book with Lee</Link><Link href="/work" className="btn-ghost">See Lee&apos;s work</Link></div>
         </div>
-        <div className="niche plinth overflow-hidden ring-1 ring-gold/20 mx-auto w-full max-w-[520px]"><Img src={IMG.portrait} alt="Lee at the chair, natural window light" className="w-full aspect-[3/4]" label="Lee Ortivez" /></div>
+        <div className="niche plinth overflow-hidden ring-1 ring-gold/20 mx-auto w-full max-w-[520px]"><Img src={IMG.curls} alt="Curling-iron waves being set at the chair" className="w-full aspect-[3/4]" label="At the chair" /></div>
       </section>
       <section className="border-y border-noir/10 bg-cream">
         <div className="container-x py-16 grid grid-cols-2 lg:grid-cols-4 gap-8">

@@ -3,10 +3,17 @@ import Img from "@/components/Img";
 import FeatureTag from "@/components/FeatureTag";
 import Hero from "@/components/home/Hero";
 import { Reveal, SplitWords } from "@/components/ui/reveal";
-import { CATEGORIES, IMG, SALON, directionsUrl, mapEmbedUrl } from "@/lib/content";
+import HairSwatch from "@/components/hair/HairSwatch";
+import { CATEGORIES, CATEGORY_PHOTO, IMG, SALON, directionsUrl, mapEmbedUrl } from "@/lib/content";
 import { getHours, getServices, getSite, nextOpenings } from "@/lib/data";
 import { q } from "@/lib/db";
 import { fmtDateStr, fmtMin, hhmmToMin, localDate, money, weekdayKey } from "@/lib/time";
+
+const REEL: [string, string][] = [
+  [IMG.blowdry, "Round-brush blow dry"], [IMG.rainbow, "Vivid colour melt"], [IMG.barberCut, "Scissor-over-comb"], [IMG.styling, "Pin-curl set"],
+  [IMG.natural, "Natural texture"], [IMG.pinkFlip, "Rose-gold pink"], [IMG.curls, "Iron curls"], [IMG.barberBlow, "Barber blow-out"],
+  [IMG.updo, "Braided updo"], [IMG.silverWash, "Silver toning wash"],
+];
 
 const DAY_NAME: Record<string, string> = { mon: "Monday", tue: "Tuesday", wed: "Wednesday", thu: "Thursday", fri: "Friday", sat: "Saturday", sun: "Sunday" };
 const VISITS = [
@@ -30,13 +37,14 @@ export default async function Home() {
 
   return (
     <>
-      <Hero title={site.heroTitle} lead={site.heroLead} image={IMG.chair} tag={<FeatureTag id="booking" />}
+      <Hero title={site.heroTitle} lead={site.heroLead} tag={<FeatureTag id="booking" />}
+        shots={[{ src: IMG.color, alt: "Long lavender waves", label: "Creative colour" }, { src: IMG.blonde, alt: "Soft balayage waves from behind", label: "Lived-in blonde" }, { src: IMG.fade, alt: "A fresh skin fade with a beard line-up", label: "Barber" }]}
         openings={openings.map((o) => ({ href: `/book?date=${o.date}&t=${o.min}`, day: fmtDateStr(o.date, { weekday: "short", month: "short", day: "numeric" }), time: fmtMin(o.min) }))} />
 
       {/* Ticker, like the metal-price band on the flagship */}
       <div className="border-y border-noir/10 overflow-hidden py-4">
         <div className="flex w-max animate-marquee gap-14 whitespace-nowrap text-sm text-taupe">
-          {[0, 1].flatMap((k) => ticker.map((t) => <span key={k + t} className="flex items-center gap-14">{t}<span className="text-gold-deep">◆</span></span>))}
+          {[0, 1].flatMap((k) => ticker.map((t) => <span key={k + t} className="flex items-center gap-14">{t}<span className="text-gold-deep" aria-hidden>✂</span></span>))}
         </div>
       </div>
 
@@ -52,17 +60,20 @@ export default async function Home() {
         {/* The colour rooms: one arched niche per family of the menu */}
         <div className="container-x pb-36">
           <div className="max-w-3xl">
-            <Reveal><h2 className="h2">Every service, a shade of its own.</h2></Reveal>
-            <SplitWords inView className="mt-6 text-lg text-taupe" text="The menu is arranged like a stylist's shade chart — the same colour codes Lee mixes from every day." />
+            <Reveal><h2 className="h2">The colour ring.</h2></Reveal>
+            <SplitWords inView className="mt-6 text-lg text-taupe" text="Every service on the menu hangs on Lee's swatch ring — the same shade codes mixed at the colour bar every day. Pick a lock to see prices." />
           </div>
           <div className="mt-20 grid grid-cols-2 gap-x-6 gap-y-14 md:grid-cols-4">
             {CATEGORIES.map((c, i) => (
               <Reveal key={c.id} delay={(i % 4) * 0.1}>
                 <Link href={`/services#${c.id}`} className="group block">
-                  <div className="niche relative aspect-[3/4] overflow-hidden transition-transform duration-700 ease-luxe group-hover:-translate-y-2" style={{ background: `radial-gradient(ellipse 70% 45% at 50% 30%, rgb(255 255 255 / .22), transparent 70%), linear-gradient(180deg, ${c.hex}, ${c.hex}dd 60%, #0b0807)` }}>
-                    <span className="absolute inset-x-0 top-[18%] text-center font-display text-4xl md:text-5xl" style={{ color: c.ink, opacity: 0.85 }}>{c.shade}</span>
-                    <span className="absolute inset-x-0 bottom-6 text-center text-xs tracking-[0.2em] uppercase" style={{ color: c.ink, opacity: 0.7 }}>{c.shadeName}</span>
-                    <span className="absolute -inset-x-1/2 top-0 h-full w-1/3 -translate-x-full rotate-12 bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-[1400ms] ease-luxe group-hover:translate-x-[400%]" />
+                  <div className="niche plinth relative aspect-[3/4] overflow-hidden">
+                    <div className="absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={CATEGORY_PHOTO[c.id]} alt="" className="h-full w-full object-cover opacity-40" />
+                    </div>
+                    <HairSwatch id={c.id} hex={c.hex} code={c.shade} className="absolute left-1/2 top-[4%] h-[86%] -translate-x-1/2 origin-top transition-transform duration-[1200ms] ease-luxe group-hover:rotate-[4deg]" />
+                    <span className="absolute inset-x-0 bottom-4 text-center text-xs tracking-[0.2em] uppercase text-[#f0e6d6]/80">{c.shadeName}</span>
                   </div>
                   <p className="mt-5 font-display text-2xl">{c.name}</p>
                   <p className="text-sm text-taupe">{from[c.id] ? `From ${money(from[c.id])}` : ""}</p>
@@ -70,6 +81,22 @@ export default async function Home() {
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* The reel: a slow procession of work from the chair */}
+      <section className="py-24 overflow-hidden" aria-label="Recent work from the chair">
+        <div className="container-x flex items-end justify-between gap-6 mb-12"><Reveal><h2 className="h2">Cut, colour, <em>shine.</em></h2></Reveal><Link href="/work" className="link-arrow hidden sm:inline-flex">All work <span aria-hidden>→</span></Link></div>
+        <div className="flex w-max animate-[marquee_80s_linear_infinite] gap-6 hover:[animation-play-state:paused]">
+          {[0, 1].flatMap((k) => REEL.map(([src, t]) => (
+            <figure key={k + src} className="w-[220px] md:w-[280px] shrink-0" aria-hidden={k ? true : undefined}>
+              <div className="niche overflow-hidden ring-1 ring-noir/10">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={src} alt={k ? "" : t} loading="lazy" className="aspect-[3/4.3] w-full object-cover transition-transform duration-[1400ms] ease-luxe hover:scale-105" />
+              </div>
+              <figcaption className="mt-3 text-sm text-taupe">{t}</figcaption>
+            </figure>
+          )))}
         </div>
       </section>
 
@@ -104,7 +131,7 @@ export default async function Home() {
       <section className="relative overflow-hidden bg-[radial-gradient(ellipse_60%_70%_at_30%_50%,#3a2418_0%,#0d0907_100%)]">
         <div className="container-x grid min-h-[90svh] items-center gap-14 py-28 lg:grid-cols-[1fr_1.1fr]">
           <Reveal className="relative mx-auto w-full max-w-[460px]">
-            <div className="niche plinth overflow-hidden ring-1 ring-gold/20"><Img src={IMG.portrait} alt="Lee Ortivez at the chair" className="w-full aspect-[3/4] opacity-90" label="Lee Ortivez" /></div>
+            <div className="niche plinth overflow-hidden ring-1 ring-gold/20"><Img src={IMG.blowdry} alt="A round-brush blow dry at Lee's chair" className="w-full aspect-[3/4]" label="At the chair" /></div>
             <div className="absolute -bottom-6 -right-2 md:-right-8 glass rounded-full h-36 w-36 grid place-items-center text-center">
               <div><p className="font-display text-5xl leading-none text-gold-light">{SALON.years}</p><p className="text-[11px] text-taupe mt-1">years behind<br />the chair</p></div>
             </div>
@@ -141,7 +168,7 @@ export default async function Home() {
         <div className="container-x py-32 md:py-40">
           <div className="flex items-end justify-between gap-6"><Reveal><h2 className="h2">Fresh from the chair.</h2></Reveal><Link href="/work" className="link-arrow hidden sm:inline-flex">All work <span aria-hidden>→</span></Link></div>
           <div className="mt-16 grid grid-cols-2 gap-6 md:grid-cols-5">
-            {[[IMG.color, "All-over copper", "color"], [IMG.blonde, "Highlights", "highlights"], [IMG.barber, "Men's cut & beard", "him"], [IMG.curls, "Soft perm", "perms"], [IMG.styling, "Evening updo", "cuts"]].map(([src, t, cat], i) => (
+            {[[IMG.color, "Lavender waves", "color"], [IMG.blonde, "Lived-in balayage", "highlights"], [IMG.barber, "Fade & curl texture", "him"], [IMG.curls, "Iron curls", "cuts"], [IMG.natural, "Natural shape", "cuts"]].map(([src, t, cat], i) => (
               <Reveal key={t} delay={i * 0.08} className={i === 4 ? "hidden md:block" : ""}>
                 <Link href={`/book?cat=${cat}`} className="group block">
                   <div className="niche overflow-hidden"><Img src={src} alt={t} className="w-full aspect-[3/4.4] transition-transform duration-[1200ms] ease-luxe group-hover:scale-105" /></div>
