@@ -1,0 +1,46 @@
+export const SCHEMA = `
+CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value JSONB NOT NULL);
+CREATE TABLE IF NOT EXISTS services (
+  id SERIAL PRIMARY KEY, category TEXT NOT NULL, name TEXT NOT NULL, note TEXT,
+  duration_min INT NOT NULL, price_cents INT NOT NULL, price_label TEXT,
+  active BOOLEAN NOT NULL DEFAULT TRUE, sort INT NOT NULL DEFAULT 0);
+CREATE TABLE IF NOT EXISTS clients (
+  id SERIAL PRIMARY KEY, first_name TEXT NOT NULL, last_name TEXT, phone TEXT UNIQUE NOT NULL,
+  email TEXT, notes TEXT, allergies TEXT, marketing BOOLEAN DEFAULT FALSE,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW());
+CREATE TABLE IF NOT EXISTS appointments (
+  id SERIAL PRIMARY KEY, client_id INT REFERENCES clients(id), starts_at TIMESTAMPTZ NOT NULL,
+  ends_at TIMESTAMPTZ NOT NULL, status TEXT NOT NULL DEFAULT 'confirmed',
+  service_ids INT[] NOT NULL DEFAULT '{}', service_names TEXT NOT NULL, category TEXT,
+  total_cents INT NOT NULL DEFAULT 0, deposit_cents INT NOT NULL DEFAULT 0, paid_cents INT NOT NULL DEFAULT 0,
+  notes TEXT, first_color BOOLEAN DEFAULT FALSE, source TEXT DEFAULT 'online',
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW());
+CREATE TABLE IF NOT EXISTS blocks (id SERIAL PRIMARY KEY, starts_at TIMESTAMPTZ NOT NULL, ends_at TIMESTAMPTZ NOT NULL, reason TEXT);
+CREATE TABLE IF NOT EXISTS requests (
+  id SERIAL PRIMARY KEY, kind TEXT NOT NULL, name TEXT NOT NULL, phone TEXT NOT NULL,
+  service TEXT, preferred TEXT, days TEXT[], times TEXT[], notes TEXT,
+  status TEXT NOT NULL DEFAULT 'new', created_at TIMESTAMPTZ NOT NULL DEFAULT NOW());
+CREATE TABLE IF NOT EXISTS products (
+  id SERIAL PRIMARY KEY, slug TEXT UNIQUE NOT NULL, sku TEXT, brand TEXT NOT NULL, name TEXT NOT NULL,
+  category TEXT, description TEXT, how_to TEXT, size TEXT, price_cents INT NOT NULL, stock INT NOT NULL DEFAULT 10, image TEXT);
+CREATE TABLE IF NOT EXISTS orders (
+  id SERIAL PRIMARY KEY, name TEXT NOT NULL, phone TEXT NOT NULL, email TEXT, items JSONB NOT NULL,
+  total_cents INT NOT NULL, status TEXT NOT NULL DEFAULT 'reserved', created_at TIMESTAMPTZ NOT NULL DEFAULT NOW());
+CREATE TABLE IF NOT EXISTS gift_cards (
+  id SERIAL PRIMARY KEY, code TEXT UNIQUE NOT NULL, amount_cents INT NOT NULL, balance_cents INT NOT NULL,
+  buyer_name TEXT, buyer_email TEXT, to_name TEXT, to_email TEXT, note TEXT, design TEXT,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW());
+CREATE TABLE IF NOT EXISTS reviews (
+  id SERIAL PRIMARY KEY, author TEXT NOT NULL, rating INT NOT NULL, body TEXT NOT NULL, service TEXT,
+  source TEXT DEFAULT 'Google', reply TEXT, created_at TIMESTAMPTZ NOT NULL DEFAULT NOW());
+CREATE TABLE IF NOT EXISTS messages (
+  id SERIAL PRIMARY KEY, client_id INT REFERENCES clients(id), sender TEXT NOT NULL, body TEXT NOT NULL,
+  read BOOLEAN DEFAULT FALSE, created_at TIMESTAMPTZ NOT NULL DEFAULT NOW());
+CREATE TABLE IF NOT EXISTS saved_looks (
+  id SERIAL PRIMARY KEY, client_id INT REFERENCES clients(id), shade TEXT NOT NULL, strength INT NOT NULL,
+  area TEXT NOT NULL, created_at TIMESTAMPTZ NOT NULL DEFAULT NOW());
+CREATE TABLE IF NOT EXISTS site_changes (
+  id SERIAL PRIMARY KEY, summary TEXT NOT NULL, key TEXT NOT NULL, before JSONB, after JSONB,
+  undone BOOLEAN DEFAULT FALSE, created_at TIMESTAMPTZ NOT NULL DEFAULT NOW());
+CREATE TABLE IF NOT EXISTS otp_codes (phone TEXT PRIMARY KEY, code TEXT NOT NULL, expires_at TIMESTAMPTZ NOT NULL);
+`;
