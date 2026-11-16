@@ -5,6 +5,8 @@ import Hero from "@/components/home/Hero";
 import { Reveal, SplitWords } from "@/components/ui/reveal";
 import HairSwatch from "@/components/hair/HairSwatch";
 import LookBook from "@/components/hair/LookBook";
+import DesignHome from "@/components/design/DesignHome";
+import { getUi } from "@/lib/ui";
 import { CATEGORIES, SALON, directionsUrl, mapEmbedUrl } from "@/lib/content";
 import { getHours, getServices, getSite, nextOpenings } from "@/lib/data";
 import { categoryPhoto, getPhotos, getReel, getWork } from "@/lib/photos";
@@ -26,6 +28,9 @@ export default async function Home() {
     getPhotos(), getReel(), getWork(),
   ]);
   const REEL = reelItems.map((r) => [r.src, r.title] as const);
+  const openingList = openings.map((o) => ({ href: `/book?date=${o.date}&t=${o.min}`, day: fmtDateStr(o.date, { weekday: "short", month: "short", day: "numeric" }), time: fmtMin(o.min) }));
+  if ((await getUi()) === "design")
+    return <DesignHome title={site.heroTitle} lead={site.heroLead} photos={photos} work={work} openings={openingList} services={services} reviews={reviews} products={products} hours={hours as any} today={weekdayKey(localDate())} />;
   const from: Record<string, number> = {};
   for (const s of services) from[s.category] = Math.min(from[s.category] ?? 1e9, s.price_cents);
   const today = weekdayKey(localDate());

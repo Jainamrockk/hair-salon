@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Monogram } from "./Logo";
 import { SALON } from "@/lib/content";
+import UiToggle from "./UiToggle";
 
 const LEFT = [["/services", "Services"], ["/about", "Meet Lee"], ["/work", "Work"], ["/looks", "Looks"], ["/try-on", "Try-on"]];
 const RIGHT = [["/shop", "Shop"], ["/gift-cards", "Gift cards"], ["/visit", "Visit"]];
@@ -57,6 +58,7 @@ export default function Header({ announcement, signedIn }: { announcement?: stri
           </div>
           <div className="flex items-center justify-end gap-7">
             <div className="hidden items-center gap-7 xl:flex">{RIGHT.map(item)}</div>
+            <UiToggle initial="premium" className="hidden md:inline-flex" />
             <Link href="/account" aria-label={signedIn ? "My account" : "Sign in"} className="text-noir/70 hover:text-gold">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2"><circle cx="12" cy="8" r="4" /><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6" /></svg>
             </Link>
@@ -83,6 +85,7 @@ export default function Header({ announcement, signedIn }: { announcement?: stri
               </ul>
               <div className="hairline my-8" />
               <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">{EXTRA.map(([href, label]) => <li key={href}><Link href={href} className="text-sm text-taupe hover:text-gold">{label}</Link></li>)}</ul>
+              <div className="mt-8 flex items-center justify-between"><span className="text-taupe">Design UI</span><UiToggle initial="premium" compact /></div>
               <div className="mt-10 flex flex-wrap gap-3"><Link href="/book" className="btn-dark">Book an appointment</Link><a href={SALON.phoneHref} className="btn-ghost">Call {SALON.phone}</a></div>
             </div>
           </motion.div>

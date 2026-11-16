@@ -84,5 +84,5 @@ export function CursorSparkles() {
     };
   }, []);
 
-  return <canvas ref={canvas} className="pointer-events-none absolute inset-0 z-[5] h-full w-full" aria-hidden />;
+  return <canvas ref={canvas} className="fx pointer-events-none absolute inset-0 z-[5] h-full w-full" aria-hidden />;
 }

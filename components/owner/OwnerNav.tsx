@@ -4,6 +4,8 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import Logo from "@/components/Logo";
 import { ownerSignOut } from "@/app/actions";
+import UiToggle from "@/components/UiToggle";
+import Wordmark from "@/components/design/Wordmark";
 
 type Counts = { msgs: number; reqs: number; revs: number; orders: number };
 const GROUPS = (c: Counts) => [
@@ -12,7 +14,7 @@ const GROUPS = (c: Counts) => [
   { title: "Setup", items: [["/owner/hours", "Hours", 0], ["/owner/menu", "Prices", 0], ["/owner/rules", "Booking rules", 0], ["/owner/settings", "Salon settings", 0]] },
 ] as const;
 
-export default function OwnerNav({ counts }: { counts: Counts }) {
+export default function OwnerNav({ counts, ui }: { counts: Counts; ui: "premium" | "design" }) {
   const p = usePathname();
   const [open, setOpen] = useState(false);
   const active = (h: string) => (h === "/owner" ? p === "/owner" : p.startsWith(h));
@@ -40,7 +42,7 @@ export default function OwnerNav({ counts }: { counts: Counts }) {
       </header>
       {open && <div className="lg:hidden fixed inset-0 top-16 z-40 bg-noir p-5 overflow-y-auto">{nav}</div>}
       <aside className="hidden lg:flex flex-col bg-noir text-ivory h-screen sticky top-0 p-5">
-        <Link href="/owner" className="text-[28px] px-3 pt-2 pb-8"><Logo light /></Link>
+        <Link href="/owner" className="text-[28px] px-3 pt-2 pb-8">{ui === "design" ? <Wordmark className="h-7 w-auto" ink="#FFFFFF" /> : <Logo light />}</Link>
         <Link href="/owner/new" className="btn-gold btn-sm mb-6">+ New appointment</Link>
         <div className="flex-1 overflow-y-auto">{nav}</div>
         <div className="border-t border-ivory/10 pt-4 mt-4 flex items-center gap-3 px-2">
@@ -48,7 +50,7 @@ export default function OwnerNav({ counts }: { counts: Counts }) {
           <div className="flex-1"><p className="text-sm font-semibold">Lee Ortivez</p><p className="text-xs text-ivory/50">Salon Ché</p></div>
           <form action={ownerSignOut}><button className="text-xs text-ivory/50 hover:text-ivory" title="Sign out">Sign out</button></form>
         </div>
-        <Link href="/" target="_blank" className="text-xs text-ivory/40 hover:text-ivory px-2 mt-3">View live site ↗</Link>
+        <div className="flex items-center justify-between px-2 mt-3"><Link href="/" target="_blank" className="text-xs text-ivory/40 hover:text-ivory">View live site ↗</Link><span className="[&_span]:!text-ivory/60"><UiToggle initial={ui} /></span></div>
       </aside>
     </>
   );

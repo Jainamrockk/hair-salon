@@ -10,7 +10,7 @@ export default function HairStrands({ className = "", count = 22, color = "rgb(v
     return `M -40 ${y0} C 240 ${y0 - amp - lift}, 420 ${y0 + amp}, 720 ${y0 - lift * 0.4} S 1180 ${y0 - amp * 0.8}, 1480 ${y0 + 40 - lift}`;
   });
   return (
-    <svg viewBox="0 0 1440 640" preserveAspectRatio="none" className={`pointer-events-none ${className}`} aria-hidden>
+    <svg viewBox="0 0 1440 640" preserveAspectRatio="none" className={`fx pointer-events-none ${className}`} aria-hidden>
       <defs>
         <linearGradient id="strand" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0" stopColor={color} stopOpacity="0" />

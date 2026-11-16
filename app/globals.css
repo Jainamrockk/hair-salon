@@ -23,6 +23,10 @@
   --c-rose: 214 150 140;
   --c-danger: 232 140 128;
   --ease-luxe: cubic-bezier(0.22, 1, 0.36, 1);
+  --font-display: "Italiana";
+  --font-sans: "Jost";
+  --display-weight: 400;
+  --display-track: 0.005em;
 }
 .theme-pearl {
   color-scheme: light;
@@ -58,7 +62,7 @@ h1, h2, h3, h4 { text-wrap: balance; }
 p { text-wrap: pretty; }
 /* Italiana has one weight and no italic: emphasis is carried by champagne, not slant. */
 .font-display em, h1 em, h2 em, h3 em, .h-display em { font-style: normal; color: rgb(var(--c-gold)); }
-.font-display { font-weight: 400 !important; letter-spacing: 0.005em; }
+.font-display { font-weight: var(--display-weight) !important; letter-spacing: var(--display-track); }
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: rgb(var(--c-ground)); }
 ::-webkit-scrollbar-thumb { background: rgb(var(--c-line)); }
@@ -116,3 +120,62 @@ input[type="date"], input[type="time"] { color-scheme: inherit; }
 .grain { position: relative; }
 .grain:before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .05; z-index: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
 @media (prefers-reduced-motion: reduce) { *, *:before, *:after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }
+
+/* ───────────────────────── Design UI (the original "Salon Ché — Website UI" artifact) ─────────────────────────
+   Black and white with one accent: cherry, a hair shade. Bricolage Grotesque for display, Inter for text,
+   DM Mono for labels. Flat surfaces, soft corners, motion only to confirm an action. Toggled with `.ui-design`. */
+html.ui-design, html.ui-design .theme-pearl {
+  color-scheme: light;
+  --c-ground: 255 255 255;   /* white */
+  --c-raised: 245 244 241;   /* paper #F5F4F1 */
+  --c-surface: 255 255 255;
+  --c-line: 221 218 211;     /* line #DDDAD3 */
+  --c-ink: 21 19 15;         /* ink #15130F */
+  --c-body: 58 55 50;        /* ink2 #3A3732 */
+  --c-ash: 103 99 91;        /* muted #67635B */
+  --c-smoke: 103 99 91;
+  --c-gold: 200 16 46;       /* cherry #C8102E */
+  --c-gold-light: 221 169 75;/* honey #DDA94B — accent on dark */
+  --c-gold-deep: 160 12 36;  /* cherryDeep #A00C24 */
+  --c-rose: 200 16 46;
+  --c-danger: 179 38 30;
+  --font-display: "Bricolage Grotesque Variable";
+  --font-sans: "Inter";
+  --display-weight: 700;
+  --display-track: -0.02em;
+}
+html.ui-design .theme-pearl { --c-ground: 245 244 241; --c-surface: 255 255 255; }
+html.ui-design body { font-weight: 400; font-size: 1rem; line-height: 1.5; }
+html.ui-design .h1, html.ui-design .h-display, html.ui-design h1.font-display { font-weight: 800 !important; letter-spacing: -0.035em; }
+html.ui-design .h2 { font-size: clamp(2rem, 3.2vw, 2.75rem); line-height: 1.05; }
+html.ui-design .lead { font-weight: 400; color: rgb(var(--c-body)); }
+html.ui-design .eyebrow, html.ui-design .eyebrow-gold, html.ui-design .label {
+  font-family: "DM Mono", ui-monospace, monospace; font-size: 12px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase;
+}
+html.ui-design .eyebrow-gold { color: #C8102E; }
+html.ui-design .btn { font-weight: 600; font-size: 1rem; letter-spacing: -0.005em; transition-duration: 120ms; min-height: 3rem; padding-left: 1.4rem; padding-right: 1.4rem; }
+html.ui-design .btn-sm { min-height: 0; padding: .55rem 1rem; font-size: .875rem; }
+html.ui-design .btn-dark:hover { background: #C8102E; }
+html.ui-design .btn-ghost { border-width: 1.5px; border-color: #8F8A80; }
+html.ui-design .btn-ghost:hover { background: #15130F; color: #fff; border-color: #15130F; }
+html.ui-design .card { background: #fff; border-color: #DDDAD3; border-radius: 20px; box-shadow: 0 1px 2px rgba(21,19,15,.06), 0 1px 1px rgba(21,19,15,.04); }
+html.ui-design .input { border-width: 1.5px; border-color: #8F8A80; border-radius: 14px; }
+html.ui-design .input:focus { border-color: #15130F; box-shadow: 0 0 0 3px rgba(21,19,15,.12); }
+html.ui-design .chip { border-color: #DDDAD3; color: #3A3732; font-weight: 500; }
+html.ui-design .chip-on { background: #15130F !important; color: #fff !important; border-color: #15130F !important; }
+html.ui-design .tag-price { background: #FBE8EB; border-color: #F3C3CB; color: #A00C24; font-weight: 600; }
+html.ui-design .niche { border-radius: 28px; box-shadow: none; }
+html.ui-design .plinth { background: #F5F4F1; }
+html.ui-design .pin-spot, html.ui-design .grain:before { display: none; }
+html.ui-design .glass { background: #fff; border-color: #DDDAD3; box-shadow: 0 2px 6px rgba(21,19,15,.06), 0 16px 40px rgba(21,19,15,.10); backdrop-filter: none; }
+html.ui-design .link-luxe { background-size: 0 1px; }
+html.ui-design a.link-luxe:hover, html.ui-design .link-arrow:hover { color: #C8102E; }
+html.ui-design .fx { display: none !important; }
+html.ui-design ::selection { background: #FBE8EB; color: #15130F; }
+html.ui-design :focus-visible { outline: 3px solid #15130F; outline-offset: 3px; }
+html.ui-design .animate-marquee { animation: none; }
+@keyframes rise-design { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+.d-rise { animation: rise-design .7s cubic-bezier(.2,.7,.2,1) both; }
+.d-lift { transition: transform .2s cubic-bezier(.2,.7,.2,1), box-shadow .2s; }
+.d-lift:hover { transform: translateY(-6px); box-shadow: 0 2px 6px rgba(21,19,15,.06), 0 16px 40px rgba(21,19,15,.10); }
+.d-heavy { font-weight: 800 !important; letter-spacing: -0.04em !important; }

@@ -67,5 +67,5 @@ export default function HairCanvas({ className = "", palette = ["#3a2418", "#6b4
     document.addEventListener("pointerleave", onLeave);
     return () => { cancelAnimationFrame(raf); io.disconnect(); window.removeEventListener("resize", build); window.removeEventListener("pointermove", onMove); document.removeEventListener("pointerleave", onLeave); };
   }, [density, palette]);
-  return <canvas ref={ref} className={`pointer-events-none ${className}`} aria-hidden />;
+  return <canvas ref={ref} className={`fx pointer-events-none ${className}`} aria-hidden />;
 }

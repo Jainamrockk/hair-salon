@@ -23,8 +23,9 @@ export default {
         danger: v("danger"),
       },
       fontFamily: {
-        display: ["Italiana", "Didot", '"Bodoni 72"', "serif"],
-        sans: ["Jost", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "Didot", '"Bodoni 72"', "serif"],
+        sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
+        mono: ['"DM Mono"', "ui-monospace", "Menlo", "monospace"],
       },
       letterSpacing: { luxe: "0.02em" },
       boxShadow: { soft: "0 40px 120px rgb(5 4 3 / 0.55)" },

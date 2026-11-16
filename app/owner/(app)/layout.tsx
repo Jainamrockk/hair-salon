@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { isOwner } from "@/lib/auth";
 import { q } from "@/lib/db";
 import OwnerNav from "@/components/owner/OwnerNav";
+import { getUi } from "@/lib/ui";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: { default: "Owner", template: "%s · Owner · Salon Ché" }, robots: { index: false } };
@@ -15,7 +16,7 @@ export default async function OwnerLayout({ children }: { children: React.ReactN
     (SELECT COUNT(*)::int FROM orders WHERE status IN ('reserved','ready')) AS orders`);
   return (
     <div className="theme-pearl min-h-screen bg-ivory lg:grid lg:grid-cols-[260px_1fr]">
-      <OwnerNav counts={c} />
+      <OwnerNav counts={c} ui={await getUi()} />
       <main className="min-w-0 px-5 md:px-10 py-8 md:py-10 pb-28">{children}</main>
     </div>
   );
