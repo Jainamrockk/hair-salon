@@ -6,7 +6,7 @@ import { joinWaitlist, requestAfterHours } from "@/app/actions";
 function Sent({ title, body }: { title: string; body: string }) {
   return (
     <div className="card p-10 text-center bg-white">
-      <div className="mx-auto h-16 w-16 rounded-full bg-gold text-white grid place-items-center text-2xl">✓</div>
+      <div className="mx-auto h-16 w-16 rounded-full bg-gold text-ivory grid place-items-center text-2xl">✓</div>
       <h2 className="font-display text-5xl mt-6">{title}</h2>
       <p className="text-taupe mt-3">{body}</p>
       <div className="mt-8 flex justify-center gap-3"><Link href="/" className="btn-dark btn-sm">Back home</Link><Link href="/services" className="btn-ghost btn-sm">Browse services</Link></div>
@@ -28,7 +28,7 @@ export function AfterHoursForm({ service }: { service?: string }) {
       <div><label className="label" htmlFor="s">Service</label><input id="s" name="service" className="input" defaultValue={service} placeholder="e.g. Highlights, two colors" /></div>
       <div><label className="label" htmlFor="w">When would work?</label><input id="w" name="preferred" className="input" placeholder="e.g. Thursday after 7 PM, or Saturday 8 AM" required /></div>
       <div><label className="label" htmlFor="o">Anything else?</label><textarea id="o" name="notes" rows={3} className="input" /></div>
-      {err && <p role="alert" className="text-[#8a2f25]">{err}</p>}
+      {err && <p role="alert" className="text-danger">{err}</p>}
       <button className="btn-dark" disabled={pending}>{pending ? "Sending…" : "Send request"}</button>
       <p className="text-xs text-taupe">After-hours visits may carry a small premium. Lee confirms the price with you by text.</p>
     </form>
@@ -57,7 +57,7 @@ export function WaitlistForm({ service, minutes }: { service?: string; minutes?:
         <div><label className="label" htmlFor="wp">Mobile number</label><input id="wp" className="input" inputMode="tel" value={phone} onChange={(e) => setPhone(e.target.value)} /></div>
       </div>
       <p className="text-sm text-taupe">When a time opens, the first person it fits gets a text and 30 minutes to take it.</p>
-      {err && <p role="alert" className="text-[#8a2f25]">{err}</p>}
+      {err && <p role="alert" className="text-danger">{err}</p>}
       <button className="btn-dark" disabled={pending} onClick={() => start(async () => { const r = await joinWaitlist({ name, phone, service: svc, days, times, weeks }); r.ok ? setDone(true) : setErr(r.error); })}>{pending ? "Joining…" : "Join the waitlist"}</button>
     </div>
   );

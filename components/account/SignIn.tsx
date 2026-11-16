@@ -25,7 +25,7 @@ export default function SignIn() {
             <h2 className="font-display text-4xl">Sign in</h2>
             <label className="label mt-6" htmlFor="sp">Mobile number</label>
             <div className="flex"><span className="rounded-l-xl border border-r-0 border-stone/50 bg-cream px-4 grid place-items-center text-taupe">+1</span><input id="sp" className="input !rounded-l-none" inputMode="tel" autoComplete="tel-national" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="(208) 555-0142" /></div>
-            {err && <p role="alert" className="text-[#8a2f25] mt-3">{err}</p>}
+            {err && <p role="alert" className="text-danger mt-3">{err}</p>}
             <button className="btn-dark w-full mt-6" disabled={pending}>{pending ? "Sending…" : "Text me a code"}</button>
           </form>
         ) : (
@@ -34,7 +34,7 @@ export default function SignIn() {
             <p className="text-taupe mt-2">Sent to {phone}. <button type="button" className="underline" onClick={() => setStage("phone")}>Change</button></p>
             {demo && <p className="mt-4 rounded-xl bg-gold/10 border border-gold/30 p-3 text-sm">Demo mode (no SMS provider yet): your code is <b className="tracking-widest">{demo}</b></p>}
             <input className="input mt-6 text-center text-3xl tracking-[0.5em] font-display" inputMode="numeric" autoComplete="one-time-code" maxLength={6} value={code} onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))} aria-label="6-digit code" />
-            {err && <p role="alert" className="text-[#8a2f25] mt-3">{err}</p>}
+            {err && <p role="alert" className="text-danger mt-3">{err}</p>}
             <button className="btn-dark w-full mt-6" disabled={pending || code.length !== 6}>{pending ? "Checking…" : "Sign in"}</button>
             <button type="button" className="w-full mt-3 text-sm underline text-taupe" onClick={() => start(async () => { const r = await sendCode(phone); if (r.ok) setDemo(r.demoCode); })}>Resend code</button>
           </form>

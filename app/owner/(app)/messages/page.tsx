@@ -22,7 +22,7 @@ export default async function OwnerMessages({ searchParams }: { searchParams: Pr
         <ul className="border-r border-sand overflow-y-auto">
           {threads.map((t) => (
             <li key={t.client_id}><Link href={`/owner/messages?c=${t.client_id}`} className={`block p-4 border-b border-sand/60 ${t.client_id === active ? "bg-cream" : "hover:bg-cream/50"}`}>
-              <div className="flex justify-between"><p className="font-semibold">{t.first_name} {t.last_name}</p>{t.unread ? <span className="h-5 min-w-5 px-1.5 rounded-full bg-gold text-white text-[11px] grid place-items-center">{t.unread}</span> : null}</div>
+              <div className="flex justify-between"><p className="font-semibold">{t.first_name} {t.last_name}</p>{t.unread ? <span className="h-5 min-w-5 px-1.5 rounded-full bg-gold text-ivory text-[11px] grid place-items-center">{t.unread}</span> : null}</div>
               <p className="text-sm text-taupe truncate">{t.body}</p>
             </Link></li>
           ))}

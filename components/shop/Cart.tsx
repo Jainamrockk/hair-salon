@@ -43,7 +43,7 @@ function Drawer() {
         <div className="flex justify-between items-center p-6 border-b border-sand"><p className="font-display text-3xl">Your bag</p><button onClick={() => setOpen(false)} className="text-2xl" aria-label="Close">×</button></div>
         {done ? (
           <div className="p-8 text-center flex-1">
-            <div className="mx-auto h-16 w-16 rounded-full bg-gold text-white grid place-items-center text-2xl">✓</div>
+            <div className="mx-auto h-16 w-16 rounded-full bg-gold text-ivory grid place-items-center text-2xl">✓</div>
             <p className="font-display text-4xl mt-6">Reserved.</p>
             <p className="text-taupe mt-2">Order #{done}. We&apos;ll text you when it&apos;s ready at 507 Almond Street. Pay at pickup.</p>
             <button className="btn-dark btn-sm mt-6" onClick={() => { setDone(null); setOpen(false); }}>Keep browsing</button>
@@ -53,7 +53,7 @@ function Drawer() {
             <ul className="flex-1 overflow-y-auto divide-y divide-sand px-6">
               {items.map((i) => (
                 <li key={i.slug} className="py-4 flex justify-between gap-3">
-                  <div><p className="text-xs uppercase tracking-widest text-taupe">{i.brand}</p><p className="font-display text-xl">{i.name}</p>
+                  <div><p className="text-xs tracking-[0.02em] text-taupe">{i.brand}</p><p className="font-display text-xl">{i.name}</p>
                     <div className="flex items-center gap-3 mt-2"><button className="h-7 w-7 rounded-full border border-sand" onClick={() => setQty(i.slug, i.qty - 1)} aria-label="Less">−</button><span>{i.qty}</span><button className="h-7 w-7 rounded-full border border-sand" onClick={() => setQty(i.slug, i.qty + 1)} aria-label="More">+</button></div></div>
                   <p className="font-display text-xl">${((i.price * i.qty) / 100).toFixed(0)}</p>
                 </li>
@@ -64,7 +64,7 @@ function Drawer() {
               <input className="input" placeholder="Your name" value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} aria-label="Name" />
               <input className="input" placeholder="Mobile number" inputMode="tel" value={f.phone} onChange={(e) => setF({ ...f, phone: e.target.value })} aria-label="Mobile" />
               <input className="input" placeholder="Email (optional)" value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} aria-label="Email" />
-              {err && <p className="text-sm text-[#8a2f25]">{err}</p>}
+              {err && <p className="text-sm text-danger">{err}</p>}
               <button className="btn-dark w-full" disabled={pending} onClick={() => start(async () => { const r = await reserveOrder({ items: items.map((i) => ({ slug: i.slug, qty: i.qty })), ...f }); if (!r.ok) return setErr(r.error); clear(); setDone(r.id); })}>{pending ? "Reserving…" : "Reserve for pickup"}</button>
               <p className="text-xs text-taupe text-center">Pickup at the salon during opening hours.</p>
             </div>

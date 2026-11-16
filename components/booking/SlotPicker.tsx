@@ -72,7 +72,7 @@ export default function SlotPicker({ duration, excludeId, value, onChange, initi
             <button type="button" onClick={() => shift(1)} className="h-9 w-9 rounded-full border border-sand hover:border-noir" aria-label="Next month">›</button>
           </div>
         </div>
-        <div className="grid grid-cols-7 text-center text-[11px] uppercase tracking-widest text-stone mb-2">{["S", "M", "T", "W", "T", "F", "S"].map((d, i) => <span key={i}>{d}</span>)}</div>
+        <div className="grid grid-cols-7 text-center text-[11px] tracking-[0.02em] text-stone mb-2">{["S", "M", "T", "W", "T", "F", "S"].map((d, i) => <span key={i}>{d}</span>)}</div>
         <div className={`grid grid-cols-7 gap-1 ${pending ? "opacity-60" : ""}`}>
           {Array.from({ length: lead }).map((_, i) => <span key={"e" + i} />)}
           {Array.from({ length: daysIn }).map((_, i) => {
@@ -96,7 +96,7 @@ export default function SlotPicker({ duration, excludeId, value, onChange, initi
           <>
             <div className="flex items-baseline justify-between mb-4">
               <p className="font-display text-3xl">{prettyDate(date)}</p>
-              <p className="text-xs uppercase tracking-widest text-taupe">{slots ? `${slots.length} open` : "Loading…"}</p>
+              <p className="text-xs tracking-[0.02em] text-taupe">{slots ? `${slots.length} open` : "Loading…"}</p>
             </div>
             {slots && slots.length === 0 && <p className="text-taupe">No times left this day for a visit this long.</p>}
             <div className="space-y-5">
@@ -107,7 +107,7 @@ export default function SlotPicker({ duration, excludeId, value, onChange, initi
                     {list.map((s) => {
                       const sel = value?.date === date && value?.min === s;
                       return <button type="button" key={s} onClick={() => onChange({ date, min: s })} aria-pressed={sel}
-                        className={`rounded-xl border py-3 text-sm font-semibold tabular-nums transition ${sel ? "bg-gold border-gold text-white" : "bg-white border-sand hover:border-noir"}`}>{fmtMin(s)}</button>;
+                        className={`rounded-xl border py-3 text-sm font-semibold tabular-nums transition ${sel ? "bg-gold border-gold text-ivory" : "bg-white border-sand hover:border-noir"}`}>{fmtMin(s)}</button>;
                     })}
                   </div>
                 </div>

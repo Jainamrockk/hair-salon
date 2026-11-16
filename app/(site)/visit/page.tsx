@@ -28,12 +28,12 @@ export default async function Visit() {
             ); })}</ul>
             <p className="text-sm text-taupe mt-4">After hours by appointment. <Link href="/book/request" className="underline">Request a time</Link>.</p>
           </div>
-          <div className="card p-8 bg-noir text-ivory border-noir">
+          <div className="card p-8 plinth text-noir">
             <p className="eyebrow-gold mb-4">Getting here</p>
-            <ul className="space-y-3 text-ivory/80">
+            <ul className="space-y-3 text-noir/80">
               <li>✦ Free parking directly out front</li><li>✦ Street-level entrance, no steps</li><li>✦ One guest at a time — quiet and unhurried</li><li>✦ Please arrive 5 minutes early for color</li>
             </ul>
-            <div className="mt-6 flex flex-wrap gap-3"><a href={directionsUrl} target="_blank" rel="noreferrer" className="btn-gold btn-sm">Get directions</a><a href={SALON.phoneHref} className="btn-ghost-light btn-sm">Call</a><a href={SALON.smsHref} className="btn-ghost-light btn-sm">Text</a></div>
+            <div className="mt-6 flex flex-wrap gap-3"><a href={directionsUrl} target="_blank" rel="noreferrer" className="btn-gold btn-sm">Get directions</a><a href={SALON.phoneHref} className="btn-ghost btn-sm">Call</a><a href={SALON.smsHref} className="btn-ghost btn-sm">Text</a></div>
           </div>
         </div>
       </div>

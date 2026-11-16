@@ -12,11 +12,11 @@ export default function FeaturesPage() {
     <>
       <PageHero eyebrow="Proposal for Salon Ché" title={<>Features <em>&amp; pricing.</em></>} lead="The premium base website is one price. Every feature after that is an add-on, tagged on the site with its cost — pick only what you want." />
       <div className="container-x pb-28">
-        <div className="rounded-[28px] bg-noir text-ivory p-10 md:p-14 grid md:grid-cols-[1fr_auto] gap-8 items-start">
+        <div className="rounded-[28px] plinth ring-1 ring-gold/20 text-noir p-10 md:p-14 grid md:grid-cols-[1fr_auto] gap-8 items-start">
           <div>
             <p className="eyebrow-gold">Included</p>
             <h2 className="font-display text-5xl font-light mt-3">{BASE_PACKAGE.name}</h2>
-            <ul className="mt-6 space-y-2 text-ivory/75">{BASE_PACKAGE.includes.map((x) => <li key={x} className="flex gap-3"><span className="text-gold">✦</span>{x}</li>)}</ul>
+            <ul className="mt-6 space-y-2 text-noir/75">{BASE_PACKAGE.includes.map((x) => <li key={x} className="flex gap-3"><span className="text-gold">✦</span>{x}</li>)}</ul>
           </div>
           <p className="font-display text-7xl text-gold-light">${BASE_PACKAGE.price.toLocaleString()}</p>
         </div>

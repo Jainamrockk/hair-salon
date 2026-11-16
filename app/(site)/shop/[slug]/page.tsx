@@ -30,7 +30,7 @@ export default async function Product({ params }: { params: Promise<{ slug: stri
           <p className="lead mt-6">{p.description}</p>
           <div className="mt-8 flex flex-wrap gap-3 items-center">
             <AddButton p={{ slug: p.slug, name: p.name, brand: p.brand, price: p.price_cents }} className="btn-dark" />
-            <span className={`text-sm ${p.stock > 3 ? "text-emerald-700" : "text-amber-700"}`}>{p.stock > 0 ? `${p.stock} in stock at the salon` : "Out of stock — reserve and Lee will order it"}</span>
+            <span className={`text-sm ${p.stock > 3 ? "text-emerald-500" : "text-amber-700"}`}>{p.stock > 0 ? `${p.stock} in stock at the salon` : "Out of stock — reserve and Lee will order it"}</span>
           </div>
           <div className="mt-10 border-t border-sand pt-6 space-y-6">
             <div><p className="eyebrow mb-2">How to use</p><p className="text-cocoa/90">{p.how_to}</p></div>
@@ -44,7 +44,7 @@ export default async function Product({ params }: { params: Promise<{ slug: stri
         <div className="grid sm:grid-cols-3 gap-5">{more.map((m) => (
           <Link key={m.slug} href={`/shop/${m.slug}`} className="group">
             <div className="aspect-[4/3] rounded-[20px] overflow-hidden bg-cream"><Img src={m.image} alt={m.name} className="h-full w-full group-hover:scale-105 transition duration-700" label={m.brand} /></div>
-            <p className="mt-3 text-xs uppercase tracking-widest text-taupe">{m.brand}</p><p className="font-display text-2xl">{m.name} · {money(m.price_cents)}</p>
+            <p className="mt-3 text-xs tracking-[0.02em] text-taupe">{m.brand}</p><p className="font-display text-2xl">{m.name} · {money(m.price_cents)}</p>
           </Link>
         ))}</div>
       </section>

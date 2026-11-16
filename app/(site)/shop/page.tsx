@@ -30,7 +30,7 @@ export default async function Shop({ searchParams }: { searchParams: Promise<{ f
                 <Img src={p.image} alt={`${p.brand} ${p.name}`} className="h-full w-full group-hover:scale-105 transition duration-700" label={p.brand} />
                 {p.stock <= 3 && <span className="absolute top-3 left-3 tag-price !bg-ivory">Only {p.stock} left</span>}
               </Link>
-              <p className="mt-4 text-[11px] uppercase tracking-luxe text-taupe">{p.brand} · {p.size}</p>
+              <p className="mt-4 text-[11px] tracking-[0.02em] text-taupe">{p.brand} · {p.size}</p>
               <Link href={`/shop/${p.slug}`} className="font-display text-2xl hover:text-gold-deep">{p.name}</Link>
               <div className="flex items-center justify-between mt-2"><span className="font-display text-xl">{money(p.price_cents)}</span><AddButton p={{ slug: p.slug, name: p.name, brand: p.brand, price: p.price_cents }} /></div>
             </div>

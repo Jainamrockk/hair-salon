@@ -61,7 +61,7 @@ export default async function Today() {
           {revs.length ? <Panel className="p-5"><p className="font-semibold">{revs.length} review{revs.length > 1 ? "s" : ""} to thank</p><p className="text-sm text-taupe">{revs.map((r) => `${r.author} ${"★".repeat(r.rating)}`).join(" · ")}</p><Link href="/owner/reviews" className="btn-ghost btn-sm mt-3">Reply</Link></Panel> : null}
           {msgs.map((m) => <Panel key={m.client_id} className="p-5"><p className="font-semibold">Message from {m.first_name}</p><p className="text-sm text-taupe line-clamp-2">“{m.body}”</p><Link href={`/owner/messages?c=${m.client_id}`} className="btn-ghost btn-sm mt-3">Reply</Link></Panel>)}
           {!pending.length && !reqs.length && !revs.length && !msgs.length && <Panel className="p-5 text-taupe">All caught up. ✦</Panel>}
-          <Panel className="p-5 bg-noir text-ivory border-noir"><p className="text-xs uppercase tracking-luxe text-gold-light">Quick text</p><p className="text-sm text-ivory/70 mt-2">Running behind? Let everyone after now know in one tap.</p>
+          <Panel className="p-5 bg-noir text-ivory border-noir"><p className="text-xs tracking-[0.02em] text-gold-light">Quick text</p><p className="text-sm text-ivory/70 mt-2">Running behind? Let everyone after now know in one tap.</p>
             <a href={`sms:${appts.filter((a) => new Date(a.starts_at).getTime() > nowMs).map((a) => "+1" + a.phone).join(",")}&body=Running about 15 minutes behind today — so sorry! — Lee`} className="btn-gold btn-sm mt-3">Text later clients</a>
             <p className="text-[11px] text-ivory/40 mt-2">{appts.filter((a) => new Date(a.starts_at).getTime() > nowMs).map((a) => fmtPhone(a.phone!)).join(", ") || "No later clients"}</p>
           </Panel>

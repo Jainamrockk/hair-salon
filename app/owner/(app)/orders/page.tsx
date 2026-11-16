@@ -28,7 +28,7 @@ export default async function Orders() {
         </div>
         <div className="space-y-6">
           <Panel className="p-6"><p className="font-display text-2xl">Stock on the shelf</p>
-            <ul className="mt-3 divide-y divide-sand text-sm">{stock.map((s) => <li key={s.slug} className="py-2 flex justify-between"><span>{s.brand} {s.name}</span><span className={s.stock <= 3 ? "text-[#8a2f25] font-semibold" : ""}>{s.stock}</span></li>)}</ul></Panel>
+            <ul className="mt-3 divide-y divide-sand text-sm">{stock.map((s) => <li key={s.slug} className="py-2 flex justify-between"><span>{s.brand} {s.name}</span><span className={s.stock <= 3 ? "text-danger font-semibold" : ""}>{s.stock}</span></li>)}</ul></Panel>
           <Panel className="p-6"><p className="font-display text-2xl">Gift cards sold</p>
             <ul className="mt-3 divide-y divide-sand text-sm">{cards.map((c) => <li key={c.code} className="py-2 flex justify-between"><span>{c.code}{c.to_name ? ` · ${c.to_name}` : ""}</span><span>{money(c.balance_cents)} / {money(c.amount_cents)}</span></li>)}</ul></Panel>
         </div>

@@ -36,7 +36,7 @@ export default async function Appt({ params }: { params: Promise<{ id: string }>
           <p className="font-display text-3xl">{a.first_name} {a.last_name}</p>
           <p className="text-taupe">{fmtPhone(a.phone!)}{a.email ? ` · ${a.email}` : ""}</p>
           <p className="text-sm">{c?.visits ?? 0} completed visits</p>
-          {c?.allergies && <p className="text-sm text-[#8a2f25]">Allergies: {c.allergies}</p>}
+          {c?.allergies && <p className="text-sm text-danger">Allergies: {c.allergies}</p>}
           {c?.notes && <p className="text-sm text-taupe border-l-2 border-gold pl-3">{c.notes}</p>}
           <Link href={`/owner/clients/${a.client_id}`} className="btn-ghost btn-sm">Open profile</Link>
         </Panel>

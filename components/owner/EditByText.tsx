@@ -35,7 +35,7 @@ export default function EditByText() {
           </div>
         </div>
       ) : <p className="mt-5 rounded-xl bg-cream p-4 text-sm">{draft.message}</p>)}
-      {done && <p className="mt-5 text-emerald-700">Published: {done}. It&apos;s live on salonche.com.</p>}
+      {done && <p className="mt-5 text-emerald-500">Published: {done}. It&apos;s live on salonche.com.</p>}
     </div>
   );
 }

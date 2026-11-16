@@ -15,7 +15,7 @@ function Row({ s }: { s?: { id: number; category: string; name: string; duration
       <label className="flex items-center gap-1 text-sm">$<input name="price" type="number" min={0} step={1} defaultValue={s ? s.price_cents / 100 : ""} className="input !py-2" required aria-label="Price" /></label>
       <input name="label" defaultValue={s?.price_label ?? ""} placeholder="and up" className="input !py-2" aria-label="Price label" />
       <input name="note" defaultValue={s?.note ?? ""} placeholder="Note" className="input !py-2" aria-label="Note" />
-      <label className="flex items-center gap-1 text-xs"><input type="checkbox" name="active" defaultChecked={s ? s.active : true} className="h-4 w-4 accent-[#15110F]" />Live</label>
+      <label className="flex items-center gap-1 text-xs"><input type="checkbox" name="active" defaultChecked={s ? s.active : true} className="h-4 w-4" />Live</label>
       <button className="btn-ghost btn-sm">{s ? "Save" : "Add"}</button>
     </form>
   );

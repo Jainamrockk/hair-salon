@@ -22,7 +22,7 @@ export default async function Clients({ searchParams }: { searchParams: Promise<
       <form className="mb-6"><input name="q" defaultValue={term} className="input max-w-md" placeholder="Search name or phone…" aria-label="Search clients" /></form>
       <Panel className="overflow-x-auto">
         <table className="w-full text-left min-w-[640px]">
-          <thead><tr className="text-[11px] uppercase tracking-widest text-taupe border-b border-sand"><th className="p-4">Client</th><th className="p-4">Phone</th><th className="p-4">Visits</th><th className="p-4">Spent</th><th className="p-4">Last visit</th><th className="p-4">Next</th></tr></thead>
+          <thead><tr className="text-[11px] tracking-[0.02em] text-taupe border-b border-sand"><th className="p-4">Client</th><th className="p-4">Phone</th><th className="p-4">Visits</th><th className="p-4">Spent</th><th className="p-4">Last visit</th><th className="p-4">Next</th></tr></thead>
           <tbody>
             {rows.map((r) => (
               <tr key={r.id} className="border-b border-sand/60 hover:bg-cream/50">

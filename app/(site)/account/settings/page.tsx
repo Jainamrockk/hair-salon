@@ -17,7 +17,7 @@ export default async function Settings() {
         </div>
         <div><label className="label" htmlFor="e">Email</label><input id="e" name="email" type="email" className="input" defaultValue={me?.email ?? ""} /></div>
         <div><p className="label">Mobile</p><p>{fmtPhone(me!.phone)} <span className="text-sm text-taupe">— to change it, text Lee from the new number.</span></p></div>
-        <label className="flex items-center gap-3"><input type="checkbox" name="marketing" defaultChecked={me?.marketing} className="h-5 w-5 accent-[#15110F]" />Text me offers and open-slot alerts</label>
+        <label className="flex items-center gap-3"><input type="checkbox" name="marketing" defaultChecked={me?.marketing} className="h-5 w-5" />Text me offers and open-slot alerts</label>
         <button className="btn-dark btn-sm">Save</button>
       </form>
       <div className="card p-8 bg-white">
@@ -25,7 +25,7 @@ export default async function Settings() {
         <p className="text-taupe mt-2">Download everything we keep about you, or delete it. Past visit records stay for tax purposes, without your notes.</p>
         <div className="flex flex-wrap gap-3 mt-5">
           <a href="/api/my-data" className="btn-ghost btn-sm">Download my data</a>
-          <form action={deleteMyData}><button className="btn btn-sm bg-[#8a2f25] text-white">Delete my data</button></form>
+          <form action={deleteMyData}><button className="btn btn-sm bg-danger text-ivory">Delete my data</button></form>
         </div>
       </div>
     </div>

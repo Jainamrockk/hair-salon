@@ -42,7 +42,7 @@ export default async function Money() {
               <div key={x.d} className="flex-1 flex flex-col items-center gap-2 h-full justify-end">
                 <span className="text-xs tabular-nums">{money(x.cents)}</span>
                 <div className="w-full rounded-t-xl bg-gradient-to-t from-gold-deep to-gold-light transition-all" style={{ height: `${(x.cents / max) * 100}%`, minHeight: 4 }} />
-                <span className="text-xs uppercase tracking-widest text-taupe">{fmtDateStr(x.d, { weekday: "short" })}</span>
+                <span className="text-xs tracking-[0.02em] text-taupe">{fmtDateStr(x.d, { weekday: "short" })}</span>
               </div>
             ))}
           </div>
@@ -50,7 +50,7 @@ export default async function Money() {
         <Panel className="xl:col-span-2 p-6">
           <p className="font-display text-3xl">Day by day</p>
           <table className="w-full mt-4 text-sm">
-            <thead><tr className="text-left text-[11px] uppercase tracking-widest text-taupe"><th className="py-2">Day</th><th>Visits</th><th className="text-right">Earned</th></tr></thead>
+            <thead><tr className="text-left text-[11px] tracking-[0.02em] text-taupe"><th className="py-2">Day</th><th>Visits</th><th className="text-right">Earned</th></tr></thead>
             <tbody>{days.map((x) => <tr key={x.d} className="border-t border-sand"><td className="py-2.5">{fmtDateStr(x.d, { weekday: "short", month: "short", day: "numeric" })}</td><td>{x.visits}</td><td className="text-right tabular-nums">{money(x.cents)}</td></tr>)}
               <tr className="border-t-2 border-noir font-semibold"><td className="py-2.5">Total</td><td>{days.reduce((a, x) => a + x.visits, 0)}</td><td className="text-right">{money(lastWeek)}</td></tr></tbody>
           </table>

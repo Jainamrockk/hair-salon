@@ -32,7 +32,7 @@ export default async function AccountHome() {
                   <h2 className="font-display text-4xl mt-2">{a.service_names}</h2>
                   <p className="text-taupe mt-1">with Lee · {fmtDuration(minutes)} · {money(a.total_cents)}{a.paid_cents ? ` (${money(a.paid_cents)} paid)` : ""}</p>
                 </div>
-                <span className={`self-start rounded-full px-3 py-1 text-xs uppercase tracking-widest ${a.status === "confirmed" ? "bg-emerald-100 text-emerald-800" : "bg-amber-100 text-amber-800"}`}>{STATUS[a.status]}</span>
+                <span className={`self-start rounded-full px-3 py-1 text-xs tracking-[0.02em] ${a.status === "confirmed" ? "bg-emerald-100 text-emerald-800" : "bg-amber-100 text-amber-800"}`}>{STATUS[a.status]}</span>
               </div>
               <VisitActions id={a.id} minutes={minutes} ics={icsHref(a)} freeCancel={free} deposit={a.deposit_cents} />
             </article>
@@ -45,17 +45,17 @@ export default async function AccountHome() {
         )}
       </section>
 
-      <section className="rounded-[26px] bg-noir text-ivory p-8 md:p-10">
+      <section className="rounded-[26px] plinth ring-1 ring-gold/20 text-noir p-8 md:p-10">
         <div className="flex flex-wrap justify-between gap-4 items-start">
           <div><p className="eyebrow-gold">Loyalty card</p><p className="font-display text-4xl mt-2">Every 6th visit, a treatment on Lee.</p></div>
           <FeatureTag id="loyalty" />
         </div>
         <div className="mt-8 flex gap-3">
           {Array.from({ length: 6 }).map((_, i) => (
-            <span key={i} className={`h-14 w-14 md:h-16 md:w-16 rounded-full grid place-items-center border font-display text-2xl ${i < stamps ? "bg-gold border-gold text-white" : "border-ivory/25 text-ivory/30"}`}>{i < stamps ? "é" : i + 1}</span>
+            <span key={i} className={`h-14 w-14 md:h-16 md:w-16 rounded-full grid place-items-center border font-display text-2xl ${i < stamps ? "bg-gold border-gold text-ivory" : "border-noir/25 text-noir/30"}`}>{i < stamps ? "é" : i + 1}</span>
           ))}
         </div>
-        <p className="text-sm text-ivory/60 mt-5">{6 - stamps} more visit{6 - stamps === 1 ? "" : "s"} until a complimentary botanical deep-conditioning treatment.</p>
+        <p className="text-sm text-noir/60 mt-5">{6 - stamps} more visit{6 - stamps === 1 ? "" : "s"} until a complimentary botanical deep-conditioning treatment.</p>
       </section>
 
       <section>

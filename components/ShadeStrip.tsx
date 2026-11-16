@@ -9,7 +9,7 @@ export default function ShadeStrip({ from }: { from: Record<string, number> }) {
       {CATEGORIES.map((c, i) => (
         <Link key={c.id} href={`/services#${c.id}`} style={{ background: c.hex, color: c.ink, animationDelay: `${i * 70}ms` }}
           className="group relative h-40 md:h-48 rounded-[18px] p-4 flex flex-col justify-between overflow-hidden transition duration-300 hover:-translate-y-1.5 hover:shadow-soft animate-rise">
-          <div className="flex justify-between text-[10px] uppercase tracking-[0.18em] opacity-80 font-semibold"><span>{c.shade}</span><span>{c.shadeName}</span></div>
+          <div className="flex justify-between text-[10px] tracking-[0.02em] opacity-80 font-semibold"><span>{c.shade}</span><span>{c.shadeName}</span></div>
           <span className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/15 to-transparent" />
           <div>
             <p className="font-display text-2xl leading-none">{c.name}</p>

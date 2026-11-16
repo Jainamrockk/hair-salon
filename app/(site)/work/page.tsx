@@ -32,7 +32,7 @@ export default async function Work({ searchParams }: { searchParams: Promise<{ c
             <figure key={w.t} className="group relative overflow-hidden rounded-[24px] break-inside-avoid">
               <Img src={w.src} alt={w.t} className={`w-full ${i % 3 === 0 ? "aspect-[3/4]" : i % 3 === 1 ? "aspect-square" : "aspect-[4/5]"} group-hover:scale-105 transition duration-700`} />
               <figcaption className="absolute inset-x-0 bottom-0 p-5 bg-gradient-to-t from-noir/80 to-transparent text-ivory flex items-end justify-between">
-                <div><p className="text-[10px] uppercase tracking-luxe text-gold-light">{w.cat}</p><p className="font-display text-2xl">{w.t}</p></div>
+                <div><p className="text-[10px] tracking-[0.02em] text-gold-light">{w.cat}</p><p className="font-display text-2xl">{w.t}</p></div>
                 <Link href={`/book?cat=${w.s}`} className="btn-light btn-sm">Book this look</Link>
               </figcaption>
             </figure>

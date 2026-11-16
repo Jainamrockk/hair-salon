@@ -84,8 +84,8 @@ export default function BookingFlow({ services, categories, rules, initial, tags
       <ol className="flex items-center gap-2 md:gap-4 mb-10 overflow-x-auto">
         {STEPS.map((s, i) => (
           <li key={s} className="flex items-center gap-2 md:gap-4 shrink-0">
-            <button type="button" disabled={i > step} onClick={() => setStep(i)} className={`flex items-center gap-2 text-[12px] uppercase tracking-[0.16em] font-semibold ${i === step ? "text-noir" : i < step ? "text-gold-deep" : "text-stone"}`}>
-              <span className={`grid h-7 w-7 place-items-center rounded-full text-[11px] ${i < step ? "bg-gold text-white" : i === step ? "bg-noir text-ivory" : "border border-sand"}`}>{i < step ? "✓" : `0${i + 1}`}</span><span className={i === step ? "" : "hidden sm:inline"}>{s}</span>
+            <button type="button" disabled={i > step} onClick={() => setStep(i)} className={`flex items-center gap-2 text-[12px] tracking-[0.02em] font-semibold ${i === step ? "text-noir" : i < step ? "text-gold-deep" : "text-stone"}`}>
+              <span className={`grid h-7 w-7 place-items-center rounded-full text-[11px] ${i < step ? "bg-gold text-ivory" : i === step ? "bg-noir text-ivory" : "border border-sand"}`}>{i < step ? "✓" : `0${i + 1}`}</span><span className={i === step ? "" : "hidden sm:inline"}>{s}</span>
             </button>
             {i < STEPS.length - 1 && <span className="h-px w-4 md:w-14 bg-sand" />}
           </li>
@@ -184,8 +184,8 @@ export default function BookingFlow({ services, categories, rules, initial, tags
               </div>
               <div className="card p-6 md:p-8 bg-white space-y-4">
                 <div className="flex justify-between items-start gap-3"><p className="font-display text-2xl">Texts</p>{tags["sms"]}</div>
-                <label className="flex gap-3 items-start"><input type="checkbox" className="mt-1 h-5 w-5 accent-[#15110F]" checked={f.sms} onChange={(e) => up("sms", e.target.checked)} /><span>Text me my confirmation and reminders<span className="block text-sm text-taupe">One confirmation and two reminders per visit. Reply STOP to end.</span></span></label>
-                <label className="flex gap-3 items-start"><input type="checkbox" className="mt-1 h-5 w-5 accent-[#15110F]" checked={f.marketing} onChange={(e) => up("marketing", e.target.checked)} /><span>Also text me offers and open-slot alerts<span className="block text-sm text-taupe">A few a month at most. Stop any time.</span></span></label>
+                <label className="flex gap-3 items-start"><input type="checkbox" className="mt-1 h-5 w-5" checked={f.sms} onChange={(e) => up("sms", e.target.checked)} /><span>Text me my confirmation and reminders<span className="block text-sm text-taupe">One confirmation and two reminders per visit. Reply STOP to end.</span></span></label>
+                <label className="flex gap-3 items-start"><input type="checkbox" className="mt-1 h-5 w-5" checked={f.marketing} onChange={(e) => up("marketing", e.target.checked)} /><span>Also text me offers and open-slot alerts<span className="block text-sm text-taupe">A few a month at most. Stop any time.</span></span></label>
               </div>
             </section>
           )}
@@ -200,7 +200,7 @@ export default function BookingFlow({ services, categories, rules, initial, tags
                   <li>✦ Free to reschedule or cancel until {cancelBy ? cancelBy.toLocaleString("en-US", { timeZone: "UTC", weekday: "long", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }) : ""} — {rules.cancelHours} hours before.</li>
                   {deposit ? <li>✦ After that, or if you miss the visit, the {$(deposit)} deposit is kept.</li> : null}
                 </ul>
-                {deposit ? <label className="flex items-center gap-3 mt-5 font-semibold"><input type="checkbox" className="h-5 w-5 accent-[#15110F]" checked={agree} onChange={(e) => setAgree(e.target.checked)} />I agree to the cancellation policy</label> : null}
+                {deposit ? <label className="flex items-center gap-3 mt-5 font-semibold"><input type="checkbox" className="h-5 w-5" checked={agree} onChange={(e) => setAgree(e.target.checked)} />I agree to the cancellation policy</label> : null}
               </div>
               {deposit ? (
                 <div className="card p-6 md:p-8 bg-white space-y-5">
@@ -209,7 +209,7 @@ export default function BookingFlow({ services, categories, rules, initial, tags
                     <button type="button" onClick={() => setPay("apple")} className={`rounded-xl py-3.5 font-semibold ${pay === "apple" ? "bg-noir text-ivory ring-4 ring-gold/30" : "bg-noir/90 text-ivory"}`}>Apple Pay</button>
                     <button type="button" onClick={() => setPay("google")} className={`rounded-xl py-3.5 font-semibold border ${pay === "google" ? "border-noir ring-4 ring-gold/30" : "border-sand"} bg-white`}>G Pay</button>
                   </div>
-                  <div className="flex items-center gap-3 text-xs uppercase tracking-widest text-stone"><span className="h-px flex-1 bg-sand" />or<span className="h-px flex-1 bg-sand" /></div>
+                  <div className="flex items-center gap-3 text-xs tracking-[0.02em] text-stone"><span className="h-px flex-1 bg-sand" />or<span className="h-px flex-1 bg-sand" /></div>
                   <div className="flex gap-2">{(["card", "gift"] as const).map((p) => <button type="button" key={p} onClick={() => setPay(p)} className={`chip ${pay === p ? "chip-on" : "bg-white"}`}>{p === "card" ? "Pay by card" : "Use a gift card"}</button>)}</div>
                   {pay === "card" && (
                     <div className="grid grid-cols-6 gap-3">
@@ -225,38 +225,38 @@ export default function BookingFlow({ services, categories, rules, initial, tags
               ) : null}
             </section>
           )}
-          {err && <p role="alert" className="mt-6 rounded-xl bg-rose/10 border border-rose/40 text-[#8a2f25] px-4 py-3">{err}</p>}
+          {err && <p role="alert" className="mt-6 rounded-xl bg-rose/10 border border-rose/40 text-danger px-4 py-3">{err}</p>}
         </div>
 
         {/* summary */}
         <aside className="lg:col-span-4 min-w-0">
-          <div className="lg:sticky lg:top-28 rounded-[26px] bg-noir text-ivory p-7">
+          <div className="lg:sticky lg:top-28 rounded-[26px] plinth ring-1 ring-gold/20 text-noir p-7">
             <p className="eyebrow-gold">Your appointment</p>
             {chosen.length ? (
-              <ul className="mt-4 divide-y divide-ivory/10">
+              <ul className="mt-4 divide-y divide-noir/10">
                 {chosen.map((s) => (
                   <li key={s.id} className="py-3 flex justify-between gap-3">
-                    <div><p>{s.name}</p><p className="text-xs text-ivory/50">{dur(s.duration_min)}</p></div>
-                    <div className="text-right"><p className="font-display text-xl">{$(s.price_cents)}</p>{step === 0 && <button type="button" onClick={() => toggle(s.id)} className="text-[11px] text-ivory/50 hover:text-gold-light">Remove</button>}</div>
+                    <div><p>{s.name}</p><p className="text-xs text-noir/50">{dur(s.duration_min)}</p></div>
+                    <div className="text-right"><p className="font-display text-xl">{$(s.price_cents)}</p>{step === 0 && <button type="button" onClick={() => toggle(s.id)} className="text-[11px] text-noir/50 hover:text-gold-light">Remove</button>}</div>
                   </li>
                 ))}
               </ul>
-            ) : <p className="mt-4 text-ivory/60">Nothing chosen yet.</p>}
-            <div className="mt-4 space-y-1.5 text-sm text-ivory/70 border-t border-ivory/10 pt-4">
+            ) : <p className="mt-4 text-noir/60">Nothing chosen yet.</p>}
+            <div className="mt-4 space-y-1.5 text-sm text-noir/70 border-t border-noir/10 pt-4">
               <p>With Lee Ortivez</p>
-              {slot && <p className="text-ivory">{prettyDate(slot.date, false)} · {fmtMin(slot.min)} – {fmtMin(slot.min + minutes)}</p>}
+              {slot && <p className="text-noir">{prettyDate(slot.date, false)} · {fmtMin(slot.min)} – {fmtMin(slot.min + minutes)}</p>}
               <p>507 Almond Street, Nampa</p>
               {minutes ? <p>About {dur(minutes)}</p> : null}
             </div>
-            <div className="mt-5 border-t border-ivory/10 pt-4 space-y-1">
+            <div className="mt-5 border-t border-noir/10 pt-4 space-y-1">
               <div className="flex justify-between"><span>Services</span><span className="font-display text-2xl">{$(total, true)}</span></div>
-              {deposit && step >= 3 ? <><div className="flex justify-between text-gold-light"><span>Deposit, due today</span><span>{$(deposit, true)}</span></div><div className="flex justify-between text-ivory/60 text-sm"><span>Due at the salon</span><span>{$(total - deposit, true)}</span></div></> : null}
+              {deposit && step >= 3 ? <><div className="flex justify-between text-gold-light"><span>Deposit, due today</span><span>{$(deposit, true)}</span></div><div className="flex justify-between text-noir/60 text-sm"><span>Due at the salon</span><span>{$(total - deposit, true)}</span></div></> : null}
             </div>
             <button type="button" onClick={next} disabled={pending} className="btn-gold w-full mt-6">
               {pending ? "Booking…" : step === 3 ? (deposit ? `Pay ${$(deposit)} and book` : "Confirm booking") : step === 2 ? "Review and confirm" : "Continue"}
             </button>
-            <p className="text-xs text-ivory/50 mt-3 text-center">Nothing is charged until you confirm.</p>
-            {step > 0 && <button type="button" onClick={() => setStep(step - 1)} className="w-full mt-3 text-xs uppercase tracking-widest text-ivory/60 hover:text-ivory">← Back</button>}
+            <p className="text-xs text-noir/50 mt-3 text-center">Nothing is charged until you confirm.</p>
+            {step > 0 && <button type="button" onClick={() => setStep(step - 1)} className="w-full mt-3 text-xs tracking-[0.02em] text-noir/60 hover:text-ivory">← Back</button>}
           </div>
         </aside>
       </div>

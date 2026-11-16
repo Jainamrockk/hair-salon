@@ -39,7 +39,7 @@ export default async function Settings() {
           <Panel className="p-6 md:p-8">
             <p className="font-display text-3xl">Connections</p>
             <ul className="mt-4 space-y-3">{integrations.map(([n, s, ok]) => (
-              <li key={n} className="flex items-center justify-between gap-3"><span className="font-semibold">{n}</span><span className={`text-sm flex items-center gap-2 ${ok ? "text-emerald-700" : "text-amber-700"}`}><span className={`h-2 w-2 rounded-full ${ok ? "bg-emerald-500" : "bg-amber-500"}`} />{s}</span></li>
+              <li key={n} className="flex items-center justify-between gap-3"><span className="font-semibold">{n}</span><span className={`text-sm flex items-center gap-2 ${ok ? "text-emerald-500" : "text-amber-700"}`}><span className={`h-2 w-2 rounded-full ${ok ? "bg-emerald-500" : "bg-amber-500"}`} />{s}</span></li>
             ))}</ul>
           </Panel>
           <Panel className="p-6 md:p-8"><p className="font-display text-3xl">Feature pricing</p><p className="text-sm text-taupe mt-2">Add-on tags are visible on the site while you review the proposal.</p><Link href="/features" className="btn-ghost btn-sm mt-4">See features & pricing</Link></Panel>

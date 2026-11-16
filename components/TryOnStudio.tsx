@@ -124,26 +124,26 @@ export default function TryOnStudio() {
   return (
     <div className="grid lg:grid-cols-12 gap-8">
       <div className="lg:col-span-8">
-        <div className="relative rounded-[28px] overflow-hidden bg-noir min-h-[420px] grid place-items-center">
+        <div className="relative rounded-[28px] overflow-hidden plinth ring-1 ring-noir/10 min-h-[420px] grid place-items-center">
           <canvas ref={view} onPointerDown={down} onPointerMove={move} onPointerUp={() => (painting.current = false)} className={`max-w-full max-h-[78vh] touch-none ${loaded ? "" : "hidden"} ${tool === "pick" ? "cursor-crosshair" : "cursor-cell"}`} aria-label="Your photo with the shade preview" />
           {!loaded && (
-            <div className="text-center text-ivory p-10">
+            <div className="text-center text-noir p-10">
               <p className="font-display text-5xl font-light">Start with a photo.</p>
-              <p className="text-ivory/60 mt-3 max-w-sm mx-auto">Face the camera in daylight with your hair visible. Your photo never leaves this device.</p>
+              <p className="text-noir/60 mt-3 max-w-sm mx-auto">Face the camera in daylight with your hair visible. Your photo never leaves this device.</p>
               <div className="mt-8 flex flex-wrap justify-center gap-3">
                 <label className="btn-gold cursor-pointer">Upload a photo<input type="file" accept="image/*" capture="user" className="sr-only" onChange={(e) => { const f = e.target.files?.[0]; if (f) load(URL.createObjectURL(f)); }} /></label>
-                <button className="btn-ghost-light" onClick={() => load(SAMPLE, true)}>Use a sample photo</button>
+                <button className="btn-ghost" onClick={() => load(SAMPLE, true)}>Use a sample photo</button>
               </div>
             </div>
           )}
-          {loaded && <><span className="absolute top-4 left-4 tag-price !bg-noir/70 !text-ivory !border-ivory/20">Before</span><span className="absolute top-4 right-4 tag-price !bg-noir/70 !text-ivory !border-ivory/20">After</span></>}
+          {loaded && <><span className="absolute top-4 left-4 tag-price !bg-noir/70 !text-ivory !border-noir/20">Before</span><span className="absolute top-4 right-4 tag-price !bg-noir/70 !text-ivory !border-noir/20">After</span></>}
         </div>
         {loaded && (
           <div className="mt-4 space-y-3">
-            <label className="flex items-center gap-4 text-sm"><span className="w-24 text-taupe">Before / after</span><input type="range" min={0} max={100} value={split} onChange={(e) => setSplit(+e.target.value)} className="flex-1 accent-[#B08D57]" /></label>
+            <label className="flex items-center gap-4 text-sm"><span className="w-24 text-taupe">Before / after</span><input type="range" min={0} max={100} value={split} onChange={(e) => setSplit(+e.target.value)} className="flex-1" /></label>
             <div className="flex flex-wrap items-center gap-2">
               {(["pick", "brush", "erase"] as const).map((t) => <button key={t} onClick={() => setTool(t)} className={`chip ${tool === t ? "chip-on" : ""}`}>{t === "pick" ? "Tap to select hair" : t === "brush" ? "Brush" : "Eraser"}</button>)}
-              {tool !== "pick" && <label className="flex items-center gap-2 text-sm ml-2">Size<input type="range" min={8} max={70} value={brush} onChange={(e) => setBrush(+e.target.value)} className="accent-[#B08D57]" /></label>}
+              {tool !== "pick" && <label className="flex items-center gap-2 text-sm ml-2">Size<input type="range" min={8} max={70} value={brush} onChange={(e) => setBrush(+e.target.value)} className="" /></label>}
               <button className="chip ml-auto" onClick={() => { mask.current?.fill(0); setHasMask(false); render(); }}>Clear selection</button>
             </div>
             {msg && <p className="text-sm text-gold-deep">{msg}</p>}
@@ -156,14 +156,14 @@ export default function TryOnStudio() {
           <div className="grid grid-cols-5 gap-2">
             {SHADES.map((s) => (
               <button key={s.code} onClick={() => setShade(s)} aria-pressed={shade.code === s.code} title={`${s.code} ${s.name}`}
-                className={`aspect-[3/4] rounded-xl flex flex-col justify-end p-1.5 text-[9px] font-bold uppercase tracking-wider transition ${shade.code === s.code ? "ring-4 ring-gold/50 scale-105" : "hover:-translate-y-0.5"}`}
+                className={`aspect-[3/4] rounded-xl flex flex-col justify-end p-1.5 text-[9px] font-bold tracking-[0.02em] transition ${shade.code === s.code ? "ring-4 ring-gold/50 scale-105" : "hover:-translate-y-0.5"}`}
                 style={{ background: s.hex, color: ["9A", "10P", "8G"].includes(s.code) ? "#15110F" : "#fff" }}>{s.code}</button>
             ))}
           </div>
           <p className="font-display text-2xl mt-4">{shade.code} · {shade.name}</p>
         </div>
         <div className="card p-6 bg-white space-y-5">
-          <div><p className="label">Strength</p><input type="range" min={10} max={100} value={strength} onChange={(e) => setStrength(+e.target.value)} className="w-full accent-[#B08D57]" /><div className="flex justify-between text-xs text-taupe"><span>A hint</span><span>Full color</span></div></div>
+          <div><p className="label">Strength</p><input type="range" min={10} max={100} value={strength} onChange={(e) => setStrength(+e.target.value)} className="w-full" /><div className="flex justify-between text-xs text-taupe"><span>A hint</span><span>Full color</span></div></div>
           <div><p className="label">Where</p><div className="flex flex-wrap gap-2">{([["all", "All over"], ["highlights", "Highlights"], ["roots", "Roots"]] as const).map(([v, l]) => <button key={v} onClick={() => setArea(v)} className={`chip ${area === v ? "chip-on" : ""}`}>{l}</button>)}</div></div>
         </div>
         <div className="rounded-2xl bg-cream p-5 text-sm"><p className="font-semibold">A preview, not a promise</p><p className="text-taupe mt-1">Screens and lighting change how color looks. Lee will tell you what your hair can reach in one visit.</p></div>

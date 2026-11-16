@@ -14,7 +14,7 @@ export default async function OwnerLayout({ children }: { children: React.ReactN
     (SELECT COUNT(*)::int FROM reviews WHERE reply IS NULL) AS revs,
     (SELECT COUNT(*)::int FROM orders WHERE status IN ('reserved','ready')) AS orders`);
   return (
-    <div className="min-h-screen bg-[#F3EEE6] lg:grid lg:grid-cols-[260px_1fr]">
+    <div className="theme-pearl min-h-screen bg-ivory lg:grid lg:grid-cols-[260px_1fr]">
       <OwnerNav counts={c} />
       <main className="min-w-0 px-5 md:px-10 py-8 md:py-10 pb-28">{children}</main>
     </div>

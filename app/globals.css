@@ -2,39 +2,117 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Salon Ché design tokens ──
+   The salon after hours: espresso velvet, a pin-spot of warm light over the chair, champagne for the one
+   accent. Reading happens on pearl walls (`.theme-pearl`). Same system as the Maison Aurelle flagship:
+   Italiana for display, Jost for everything else, arched niches, slow curtain reveals.
+   Contrast: ink on ground 14.9:1, ash on ground 7.4:1, smoke on ground 4.7:1; pearl ink 14.2:1. */
 :root {
-  --font-display: "Cormorant Garamond", "Cormorant", Georgia, serif;
-  --font-sans: "Manrope", "Inter", system-ui, sans-serif;
+  color-scheme: dark;
+  --c-ground: 21 17 15;     /* #15110f velvet */
+  --c-raised: 29 24 21;     /* #1d1815 */
+  --c-surface: 35 29 26;    /* #231d1a lacquered panel */
+  --c-line: 64 55 49;       /* #403731 hairline */
+  --c-ink: 240 234 225;     /* #f0eae1 ivory text */
+  --c-body: 216 208 197;
+  --c-ash: 184 174 162;     /* secondary */
+  --c-smoke: 140 131 121;   /* tertiary */
+  --c-gold: 214 189 146;    /* #d6bd92 champagne */
+  --c-gold-light: 236 220 192;
+  --c-gold-deep: 179 151 98; /* #b39762 gold leaf */
+  --c-rose: 214 150 140;
+  --c-danger: 232 140 128;
+  --ease-luxe: cubic-bezier(0.22, 1, 0.36, 1);
 }
-html { scroll-behavior: smooth; }
+.theme-pearl {
+  color-scheme: light;
+  --c-ground: 236 231 223;  /* #ece7df pearl wall */
+  --c-raised: 226 219 209;
+  --c-surface: 246 242 236;
+  --c-line: 210 201 189;
+  --c-ink: 27 22 19;
+  --c-body: 59 51 45;
+  --c-ash: 88 80 72;
+  --c-smoke: 112 103 94;
+  --c-gold: 138 106 59;     /* darkened so it reads on pearl */
+  --c-gold-light: 154 122 69;
+  --c-gold-deep: 116 88 46;
+  --c-rose: 150 80 70;
+  --c-danger: 150 45 35;
+  background: rgb(var(--c-ground));
+  color: rgb(var(--c-ink));
+}
+
+html { scroll-behavior: smooth; background: rgb(var(--c-ground)); }
+body {
+  @apply bg-ivory text-noir font-sans antialiased;
+  font-size: 1.0625rem;
+  font-weight: 300;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+}
 main { overflow-x: clip; }
-body { @apply bg-ivory text-noir font-sans antialiased; }
-::selection { background: #B08D57; color: #fff; }
+::selection { background: rgb(var(--c-gold) / 0.35); color: rgb(var(--c-ink)); }
+:focus-visible { outline: 1px solid rgb(var(--c-gold)); outline-offset: 4px; }
+h1, h2, h3, h4 { text-wrap: balance; }
+p { text-wrap: pretty; }
+/* Italiana has one weight and no italic: emphasis is carried by champagne, not slant. */
+.font-display em, h1 em, h2 em, h3 em, .h-display em { font-style: normal; color: rgb(var(--c-gold)); }
+.font-display { font-weight: 400 !important; letter-spacing: 0.005em; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: rgb(var(--c-ground)); }
+::-webkit-scrollbar-thumb { background: rgb(var(--c-line)); }
+input[type="checkbox"], input[type="range"] { accent-color: rgb(var(--c-gold)); }
+input[type="date"], input[type="time"] { color-scheme: inherit; }
 
 @layer components {
-  .container-x { @apply mx-auto w-full max-w-[1280px] px-5 md:px-10; }
-  .eyebrow { @apply text-[11px] uppercase tracking-luxe text-taupe font-semibold; }
-  .eyebrow-gold { @apply text-[11px] uppercase tracking-luxe text-gold font-semibold; }
-  .h-display { @apply font-display font-light leading-[0.92] tracking-[-0.02em]; }
-  .h1 { @apply font-display font-light text-5xl md:text-7xl leading-[0.95] tracking-[-0.02em]; }
-  .h2 { @apply font-display font-light text-4xl md:text-6xl leading-[1] tracking-[-0.015em]; }
-  .h3 { @apply font-display text-2xl md:text-3xl leading-tight; }
-  .lead { @apply text-lg md:text-xl text-cocoa/80 leading-relaxed font-light; }
-  .btn { @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-[13px] font-semibold uppercase tracking-[0.16em] transition duration-200 active:scale-[.98] disabled:opacity-40 disabled:pointer-events-none; }
+  .container-x { @apply mx-auto w-full max-w-[1500px] px-5 md:px-10; }
+  .eyebrow { @apply text-[0.875rem] text-stone font-normal tracking-[0.01em]; }
+  .eyebrow-gold { @apply text-[0.875rem] text-gold font-normal tracking-[0.01em]; }
+  .h-display { @apply font-display leading-[0.95]; }
+  .h1 { @apply font-display text-[clamp(3rem,7vw,6.5rem)] leading-[0.98]; }
+  .h2 { @apply font-display text-[clamp(2.4rem,5vw,4.6rem)] leading-[1.02]; }
+  .h3 { @apply font-display text-3xl md:text-4xl leading-tight; }
+  .lead { @apply text-lg md:text-xl text-taupe leading-relaxed font-light; }
+  .hairline { height: 1px; background: rgb(var(--c-ink) / 0.12); }
+
+  .btn { @apply inline-flex items-center justify-center gap-3 min-h-[3.25rem] rounded-full px-9 py-3.5 text-[0.9375rem] font-normal tracking-[0.02em] transition-[background,color,border-color,transform] duration-500 ease-luxe active:scale-[.98] disabled:opacity-40 disabled:pointer-events-none; }
   .btn-dark { @apply btn bg-noir text-ivory hover:bg-gold; }
-  .btn-gold { @apply btn bg-gold text-white hover:bg-gold-deep; }
-  .btn-light { @apply btn bg-ivory text-noir hover:bg-white; }
-  .btn-ghost { @apply btn border border-noir/25 text-noir hover:border-noir hover:bg-noir hover:text-ivory; }
-  .btn-ghost-light { @apply btn border border-ivory/40 text-ivory hover:bg-ivory hover:text-noir; }
-  .btn-sm { @apply px-4 py-2 text-[11px]; }
-  .link-arrow { @apply inline-flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.18em] border-b border-current pb-1 hover:gap-3 transition-all; }
-  .card { @apply bg-white/70 border border-sand/70 rounded-[22px]; }
-  .input { @apply w-full rounded-xl border border-stone/50 bg-white px-4 py-3 text-[15px] outline-none transition placeholder:text-stone focus:border-noir focus:ring-4 focus:ring-gold/15; }
-  .label { @apply block text-[12px] uppercase tracking-[0.14em] font-semibold text-taupe mb-2; }
-  .chip { @apply inline-flex items-center gap-2 rounded-full border border-sand px-4 py-2 text-sm transition hover:border-noir; }
-  .chip-on { @apply bg-noir text-ivory border-noir; }
+  .btn-gold { @apply btn bg-gold text-ivory hover:bg-gold-light; }
+  .btn-light { @apply btn bg-ivory text-noir hover:bg-cream; }
+  .btn-ghost { @apply btn border border-noir/30 text-noir hover:border-noir; }
+  .btn-ghost-light { @apply btn border border-ivory/35 text-ivory hover:border-ivory; }
+  .btn-sm { @apply min-h-0 px-5 py-2.5 text-[0.8125rem]; }
+  .link-arrow {
+    @apply inline-flex items-center gap-2 text-[0.9375rem] transition-all duration-500;
+    background-image: linear-gradient(currentColor, currentColor); background-size: 100% 1px; background-position: 0 100%; background-repeat: no-repeat; padding-bottom: 3px;
+  }
+  .link-arrow:hover { gap: 0.9rem; }
+  .link-luxe {
+    background-image: linear-gradient(currentColor, currentColor); background-size: 0% 1px; background-position: 0 100%; background-repeat: no-repeat;
+    transition: background-size .7s var(--ease-luxe), color .4s; padding-bottom: 2px;
+  }
+  .link-luxe:hover { background-size: 100% 1px; }
+  .card { @apply bg-surface/80 border border-noir/10 rounded-[20px]; }
+  .glass { background: rgb(var(--c-ground) / 0.72); backdrop-filter: blur(22px) saturate(130%); -webkit-backdrop-filter: blur(22px) saturate(130%); border: 1px solid rgb(var(--c-ink) / 0.09); }
+  .input { @apply w-full rounded-xl border border-noir/20 bg-surface px-4 py-3 text-[15px] text-noir outline-none transition duration-500 placeholder:text-stone focus:border-gold; }
+  .label { @apply block text-[0.875rem] text-taupe mb-2; }
+  .chip { @apply inline-flex items-center gap-2 rounded-full border border-noir/15 px-4 py-2 text-[0.875rem] text-taupe transition duration-500 hover:border-noir/50 hover:text-noir; }
+  .chip-on { @apply !bg-noir !text-ivory !border-noir; }
   .rule { @apply h-px w-full bg-gradient-to-r from-transparent via-gold/50 to-transparent; }
-  .tag-price { @apply shrink-0 inline-flex items-center gap-1 rounded-full bg-gold/15 text-gold-deep border border-gold/30 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em] whitespace-nowrap; }
+  .tag-price { @apply shrink-0 inline-flex items-center gap-1.5 rounded-full border border-gold/40 bg-gold/10 px-2.5 py-1 text-[11px] font-normal tracking-[0.02em] text-gold whitespace-nowrap; }
+
+  /* The vitrine: velvet interior lit from above. */
+  .plinth {
+    background:
+      radial-gradient(ellipse 65% 45% at 50% 34%, rgb(240 220 190 / 0.12), transparent 70%),
+      radial-gradient(ellipse 40% 7% at 50% 90%, rgb(4 3 2 / 0.7), transparent 70%),
+      linear-gradient(180deg, #221c18 0%, #120e0c 100%);
+  }
+  /* The signature shape: an arched niche, like the mirror alcove at the salon. */
+  .niche { border-radius: 999px 999px 6px 6px; box-shadow: inset 0 1px 0 rgb(255 255 255 / .06), inset 0 -30px 60px rgb(0 0 0 / .25); }
+  .pin-spot { background: radial-gradient(ellipse 42% 48% at 50% 30%, rgb(240 220 190 / 0.10), transparent 72%); }
 }
-.grain:before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .06; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
-@media (prefers-reduced-motion: reduce) { *, *:before, *:after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+.grain { position: relative; }
+.grain:before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .05; z-index: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+@media (prefers-reduced-motion: reduce) { *, *:before, *:after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }

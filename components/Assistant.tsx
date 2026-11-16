@@ -29,14 +29,14 @@ export default function Assistant({ tag }: { tag?: React.ReactNode }) {
   return (
     <>
       <button onClick={() => setOpen(!open)} aria-label={open ? "Close assistant" : "Open salon assistant"}
-        className="fixed bottom-5 right-5 z-50 flex items-center gap-3 rounded-full bg-noir text-ivory pl-4 pr-5 py-3.5 shadow-soft hover:bg-cocoa transition">
-        <span className="grid h-8 w-8 place-items-center rounded-full bg-gold text-white font-display italic text-lg">é</span>
-        <span className="text-[12px] uppercase tracking-[0.16em] font-semibold hidden sm:inline">{open ? "Close" : "Ask Salon Ché"}</span>
+        className="fixed bottom-5 right-5 z-50 flex items-center gap-3 rounded-full glass text-noir pl-4 pr-5 py-3.5 shadow-soft hover:border-gold/50 transition">
+        <span className="grid h-8 w-8 place-items-center rounded-full bg-gold text-ivory font-display text-lg">é</span>
+        <span className="text-[12px] tracking-[0.02em] font-semibold hidden sm:inline">{open ? "Close" : "Ask Salon Ché"}</span>
       </button>
       {open && (
         <div className="fixed z-50 bottom-24 right-3 left-3 sm:left-auto sm:right-5 sm:w-[400px] max-h-[72vh] flex flex-col rounded-[26px] bg-ivory border border-sand shadow-soft overflow-hidden animate-rise" role="dialog" aria-label="Salon assistant">
-          <div className="bg-noir text-ivory px-5 py-4 flex items-start justify-between gap-3">
-            <div><p className="font-display text-2xl leading-none">Salon assistant</p><p className="text-xs text-ivory/60 mt-1.5">AI helper · Lee steps in when it matters</p></div>
+          <div className="plinth text-noir border-b border-noir/10 px-5 py-4 flex items-start justify-between gap-3">
+            <div><p className="font-display text-2xl leading-none">Salon assistant</p><p className="text-xs text-noir/60 mt-1.5">AI helper · Lee steps in when it matters</p></div>
             {tag}
           </div>
           <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
@@ -45,7 +45,7 @@ export default function Assistant({ tag }: { tag?: React.ReactNode }) {
                 <div className={`max-w-[85%] rounded-2xl px-4 py-3 text-[14.5px] leading-relaxed ${m.role === "user" ? "bg-noir text-ivory rounded-br-md" : "bg-white border border-sand rounded-bl-md"}`}>
                   {m.content}
                   {m.handoff && <p className="mt-2 text-xs text-gold-deep font-semibold">Passed to Lee — expect a text back.</p>}
-                  {m.links?.length ? <div className="mt-3 flex flex-wrap gap-2">{m.links.map((l) => <Link key={l.href + l.label} href={l.href} onClick={() => setOpen(false)} className="rounded-full bg-gold/15 border border-gold/30 px-3 py-1 text-xs font-semibold text-gold-deep hover:bg-gold hover:text-white">{l.label} →</Link>)}</div> : null}
+                  {m.links?.length ? <div className="mt-3 flex flex-wrap gap-2">{m.links.map((l) => <Link key={l.href + l.label} href={l.href} onClick={() => setOpen(false)} className="rounded-full bg-gold/15 border border-gold/30 px-3 py-1 text-xs font-semibold text-gold-deep hover:bg-gold hover:text-ivory">{l.label} →</Link>)}</div> : null}
                 </div>
               </div>
             ))}

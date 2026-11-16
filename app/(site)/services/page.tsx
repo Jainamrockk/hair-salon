@@ -34,7 +34,7 @@ export default async function Services() {
             return (
               <section key={c.id} id={c.id} className="scroll-mt-28">
                 <div className="flex items-center gap-5 mb-6">
-                  <div className="h-20 w-16 rounded-[14px] flex flex-col justify-between p-2 text-[9px] uppercase tracking-widest font-bold shadow" style={{ background: c.hex, color: c.ink }}><span>{c.shade}</span><span className="opacity-80">{c.shadeName}</span></div>
+                  <div className="h-20 w-16 rounded-[14px] flex flex-col justify-between p-2 text-[9px] tracking-[0.02em] font-bold shadow" style={{ background: c.hex, color: c.ink }}><span>{c.shade}</span><span className="opacity-80">{c.shadeName}</span></div>
                   <div><h2 className="font-display text-5xl font-light">{c.name}</h2>{"note" in c && c.note ? <p className="font-display italic text-xl text-gold-deep">{c.note}</p> : null}</div>
                 </div>
                 <ul className="border-t border-sand">
@@ -50,9 +50,9 @@ export default async function Services() {
               </section>
             );
           })}
-          <div className="rounded-[28px] bg-noir text-ivory p-10 md:p-14 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="rounded-[28px] plinth ring-1 ring-gold/20 text-noir p-10 md:p-14 flex flex-col md:flex-row md:items-center justify-between gap-6">
             <h2 className="font-display text-5xl font-light">Ready when <em className="text-gold-light">you are.</em></h2>
-            <div className="flex gap-3"><Link href="/book" className="btn-gold">Book an appointment</Link><a href={SALON.smsHref} className="btn-ghost-light">Text Lee</a></div>
+            <div className="flex gap-3"><Link href="/book" className="btn-gold">Book an appointment</Link><a href={SALON.smsHref} className="btn-ghost">Text Lee</a></div>
           </div>
         </div>
       </div>

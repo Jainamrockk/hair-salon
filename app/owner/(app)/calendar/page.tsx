@@ -36,7 +36,7 @@ export default async function Calendar({ searchParams }: { searchParams: Promise
           <div />
           {days.map((d) => (
             <div key={d} className={`px-3 py-3 border-b border-l border-sand ${d === today ? "bg-gold/10" : ""}`}>
-              <p className="text-[11px] uppercase tracking-widest text-taupe">{fmtDateStr(d, { weekday: "short" })}</p>
+              <p className="text-[11px] tracking-[0.02em] text-taupe">{fmtDateStr(d, { weekday: "short" })}</p>
               <p className={`font-display text-2xl ${d === today ? "text-gold-deep" : ""}`}>{fmtDateStr(d, { day: "numeric" })}</p>
             </div>
           ))}
@@ -50,9 +50,9 @@ export default async function Calendar({ searchParams }: { searchParams: Promise
             return (
               <div key={d} className="relative border-l border-sand" style={{ height: (END - START) * PX, background: "repeating-linear-gradient(to bottom, transparent 0, transparent 65px, #eee6da 65px, #eee6da 66px)" }}>
                 {h ? <>
-                  <div className="absolute inset-x-0 top-0 bg-[#ece5da]/70" style={{ height: Math.max(0, (hhmmToMin(h.open) - START) * PX) }} />
-                  <div className="absolute inset-x-0 bottom-0 bg-[#ece5da]/70" style={{ top: (hhmmToMin(h.close) - START) * PX }} />
-                </> : <div className="absolute inset-0 bg-[#ece5da]/80 grid place-items-center text-xs uppercase tracking-widest text-stone">Closed</div>}
+                  <div className="absolute inset-x-0 top-0 bg-cream/70" style={{ height: Math.max(0, (hhmmToMin(h.open) - START) * PX) }} />
+                  <div className="absolute inset-x-0 bottom-0 bg-cream/70" style={{ top: (hhmmToMin(h.close) - START) * PX }} />
+                </> : <div className="absolute inset-0 bg-cream/80 grid place-items-center text-xs tracking-[0.02em] text-stone">Closed</div>}
                 {dayBlocks.map((b) => (
                   <div key={b.id} className="absolute inset-x-1 rounded-lg bg-[repeating-linear-gradient(45deg,#d8cdbd_0,#d8cdbd_6px,#e7dfd3_6px,#e7dfd3_12px)] text-[11px] p-1.5 text-cocoa overflow-hidden" style={{ top: top(b.starts_at), height: (new Date(b.ends_at).getTime() - new Date(b.starts_at).getTime()) / 60000 * PX }}>{b.reason}</div>
                 ))}

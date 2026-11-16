@@ -14,15 +14,15 @@ export default async function About() {
           <p className="eyebrow-gold mb-5">Meet your stylist</p>
           <h1 className="h1">Lee <em>Ortivez.</em></h1>
           <p className="lead mt-8">{site.aboutLead}</p>
-          <blockquote className="mt-10 border-l-2 border-gold pl-6 font-display italic text-3xl leading-snug">“{SALON.quote}”</blockquote>
+          <blockquote className="mt-10 border-l-2 border-gold pl-6 font-display text-3xl leading-snug">“{SALON.quote}”</blockquote>
           <div className="mt-10 flex flex-wrap gap-3"><Link href="/book" className="btn-dark">Book with Lee</Link><Link href="/work" className="btn-ghost">See Lee&apos;s work</Link></div>
         </div>
-        <Img src={IMG.portrait} alt="Lee at the chair, natural window light" className="w-full aspect-[4/5] rounded-[30px]" label="Lee Ortivez" />
+        <div className="niche plinth overflow-hidden ring-1 ring-gold/20 mx-auto w-full max-w-[520px]"><Img src={IMG.portrait} alt="Lee at the chair, natural window light" className="w-full aspect-[3/4]" label="Lee Ortivez" /></div>
       </section>
-      <section className="bg-noir text-ivory">
+      <section className="border-y border-noir/10 bg-cream">
         <div className="container-x py-16 grid grid-cols-2 lg:grid-cols-4 gap-8">
           {[["34 years", "behind the chair, color and cutting"], ["Instructor", "licensed cosmetology instructor in Idaho"], ["TIGI", "former platform artist & ambassador"], ["Rusk", "advanced Designer-level training"]].map(([a, b]) => (
-            <div key={a} className="border-t border-gold/40 pt-5"><p className="font-display text-5xl text-gold-light">{a}</p><p className="text-sm text-ivory/60 mt-2">{b}</p></div>
+            <div key={a} className="border-t border-gold/40 pt-5"><p className="font-display text-5xl text-gold-light">{a}</p><p className="text-sm text-noir/60 mt-2">{b}</p></div>
           ))}
         </div>
       </section>
@@ -39,7 +39,7 @@ export default async function About() {
         </div>
       </section>
       <section className="container-x pb-28 grid lg:grid-cols-12 gap-10 items-center">
-        <Img src={IMG.interior} alt="The chair, mirror and colour bar" className="lg:col-span-7 w-full aspect-[16/10] rounded-[30px]" />
+        <div className="lg:col-span-7 niche plinth overflow-hidden"><Img src={IMG.interior} alt="The chair, mirror and colour bar" className="w-full aspect-[16/11]" /></div>
         <div className="lg:col-span-5">
           <p className="eyebrow-gold mb-4">The space</p>
           <h2 className="font-display text-5xl font-light">A calm room on <em>Almond Street.</em></h2>

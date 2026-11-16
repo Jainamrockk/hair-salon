@@ -19,7 +19,7 @@ export default async function Orders() {
           <ul className="mt-6 space-y-4">
             {orders.map((o) => (
               <li key={o.id} className="card p-6 bg-white">
-                <div className="flex justify-between gap-4"><p className="eyebrow">Order #{o.id} · {fmtDate(o.created_at)}</p><span className="text-xs uppercase tracking-widest rounded-full bg-cream px-3 py-1">{ST[o.status] ?? o.status}</span></div>
+                <div className="flex justify-between gap-4"><p className="eyebrow">Order #{o.id} · {fmtDate(o.created_at)}</p><span className="text-xs tracking-[0.02em] rounded-full bg-cream px-3 py-1">{ST[o.status] ?? o.status}</span></div>
                 <ul className="mt-3 text-lg">{o.items.map((i) => <li key={i.name}>{i.qty} × {i.name}</li>)}</ul>
                 <p className="mt-3 font-display text-2xl">{money(o.total_cents)} <span className="text-sm font-sans text-taupe">· pay at pickup</span></p>
               </li>

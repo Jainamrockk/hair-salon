@@ -56,7 +56,7 @@ export default function NewAppointment({ clients, services, preClient }: { clien
         {ids.length > 0 && (
           <div className="rounded-[22px] bg-white border border-sand p-6">
             <div className="flex justify-between items-center mb-4"><p className="font-display text-2xl">Time</p>
-              <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={manual.on} onChange={(e) => setManual({ ...manual, on: e.target.checked })} className="h-4 w-4 accent-[#15110F]" />Book anyway (any time, overrides hours)</label></div>
+              <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={manual.on} onChange={(e) => setManual({ ...manual, on: e.target.checked })} className="h-4 w-4" />Book anyway (any time, overrides hours)</label></div>
             {manual.on ? (
               <div className="grid grid-cols-2 gap-3 max-w-md"><input type="date" className="input" value={manual.date} onChange={(e) => setManual({ ...manual, date: e.target.value })} aria-label="Date" /><input type="time" className="input" value={manual.time} onChange={(e) => setManual({ ...manual, time: e.target.value })} aria-label="Time" /></div>
             ) : <SlotPicker duration={minutes} value={slot} onChange={setSlot} />}

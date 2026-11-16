@@ -37,12 +37,12 @@ export default function VisitActions({ id, minutes, ics, freeCancel, deposit }: 
             <option value="">Choose one</option><option>Schedule conflict</option><option>Feeling unwell</option><option>Found another time</option><option>Other</option>
           </select>
           <div className="mt-4 flex gap-2">
-            <button className="btn btn-sm bg-[#8a2f25] text-white hover:bg-[#6d241c]" disabled={pending} onClick={() => start(async () => { await cancelAppointment(id, reason); setMsg("Cancelled. We hope to see you soon."); router.refresh(); })}>Cancel visit</button>
+            <button className="btn btn-sm bg-danger text-ivory hover:bg-danger/80" disabled={pending} onClick={() => start(async () => { await cancelAppointment(id, reason); setMsg("Cancelled. We hope to see you soon."); router.refresh(); })}>Cancel visit</button>
             <button className="btn-ghost btn-sm" onClick={() => setMode("none")}>Keep it</button>
           </div>
         </div>
       )}
-      {msg && <p className="mt-4 text-sm text-emerald-700">{msg}</p>}
+      {msg && <p className="mt-4 text-sm text-emerald-500">{msg}</p>}
     </div>
   );
 }

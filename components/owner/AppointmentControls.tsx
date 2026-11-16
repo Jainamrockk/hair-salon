@@ -42,10 +42,10 @@ export default function AppointmentControls({ id, status, dueCents, minutes, pho
       {panel === "cancel" && (
         <div className="rounded-2xl border border-rose/40 bg-rose/5 p-5">
           <p className="font-semibold">Cancel this visit? The client gets a text.</p>
-          <button className="btn btn-sm bg-[#8a2f25] text-white mt-3" disabled={pending} onClick={() => run(() => cancelAppointment(id, "Cancelled by salon"), "Cancelled.")}>Cancel visit</button>
+          <button className="btn btn-sm bg-danger text-ivory mt-3" disabled={pending} onClick={() => run(() => cancelAppointment(id, "Cancelled by salon"), "Cancelled.")}>Cancel visit</button>
         </div>
       )}
-      {msg && <p className="text-sm text-emerald-700">{msg}</p>}
+      {msg && <p className="text-sm text-emerald-500">{msg}</p>}
     </div>
   );
 }

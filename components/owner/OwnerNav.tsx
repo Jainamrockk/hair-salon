@@ -20,11 +20,11 @@ export default function OwnerNav({ counts }: { counts: Counts }) {
     <nav className="flex flex-col gap-6" aria-label="Owner">
       {GROUPS(counts).map((g) => (
         <div key={g.title}>
-          {g.title && <p className="px-3 mb-2 text-[10px] uppercase tracking-luxe text-ivory/40">{g.title}</p>}
+          {g.title && <p className="px-3 mb-2 text-[10px] tracking-[0.02em] text-ivory/40">{g.title}</p>}
           <ul className="space-y-0.5">
             {g.items.map(([h, l, n]) => (
               <li key={h}><Link href={h} onClick={() => setOpen(false)} className={`flex items-center justify-between rounded-xl px-3 py-2.5 text-[14px] transition ${active(h) ? "bg-ivory text-noir font-semibold" : "text-ivory/75 hover:bg-ivory/10"}`}>
-                {l}{n ? <span className={`min-w-5 h-5 px-1.5 rounded-full text-[11px] grid place-items-center ${active(h) ? "bg-gold text-white" : "bg-gold/90 text-white"}`}>{n}</span> : null}
+                {l}{n ? <span className={`min-w-5 h-5 px-1.5 rounded-full text-[11px] grid place-items-center ${active(h) ? "bg-gold text-ivory" : "bg-gold/90 text-ivory"}`}>{n}</span> : null}
               </Link></li>
             ))}
           </ul>
@@ -44,7 +44,7 @@ export default function OwnerNav({ counts }: { counts: Counts }) {
         <Link href="/owner/new" className="btn-gold btn-sm mb-6">+ New appointment</Link>
         <div className="flex-1 overflow-y-auto">{nav}</div>
         <div className="border-t border-ivory/10 pt-4 mt-4 flex items-center gap-3 px-2">
-          <span className="h-10 w-10 rounded-full bg-gold text-white grid place-items-center font-display text-xl">L</span>
+          <span className="h-10 w-10 rounded-full bg-gold text-ivory grid place-items-center font-display text-xl">L</span>
           <div className="flex-1"><p className="text-sm font-semibold">Lee Ortivez</p><p className="text-xs text-ivory/50">Salon Ché</p></div>
           <form action={ownerSignOut}><button className="text-xs text-ivory/50 hover:text-ivory" title="Sign out">Sign out</button></form>
         </div>

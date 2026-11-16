@@ -3,9 +3,9 @@ import { useState, useTransition } from "react";
 import { buyGiftCard, checkGiftCard } from "@/app/actions";
 
 const DESIGNS = [
-  { id: "noir", label: "Noir", cls: "from-noir via-cocoa to-[#4b3a2f] text-ivory" },
-  { id: "champagne", label: "Champagne", cls: "from-[#e9dcc6] via-[#d4b98a] to-gold text-noir" },
-  { id: "cherry", label: "Cherry", cls: "from-[#5e1224] via-[#8f1d2c] to-[#b0592b] text-ivory" },
+  { id: "noir", label: "Noir", cls: "from-[#2a211c] via-[#3b2c22] to-[#7a5d37] text-[#f0e6d6] ring-1 ring-[#d6bd92]/30" },
+  { id: "champagne", label: "Champagne", cls: "from-[#efe5d4] via-[#d9c29a] to-[#b39762] text-[#1b1613]" },
+  { id: "cherry", label: "Cherry", cls: "from-[#3a0d17] via-[#6e1524] to-[#a14a26] text-[#f0e6d6]" },
 ];
 
 export default function GiftCardBuilder() {
@@ -24,7 +24,7 @@ export default function GiftCardBuilder() {
     <div className={`relative aspect-[1.6/1] rounded-[24px] bg-gradient-to-br ${d.cls} p-7 md:p-9 flex flex-col justify-between shadow-soft overflow-hidden`}>
       <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full border border-current opacity-15" />
       <div className="absolute -right-4 -top-4 h-32 w-32 rounded-full border border-current opacity-10" />
-      <div className="flex justify-between items-start"><span className="font-display text-3xl">Salon <em>Ché</em></span><span className="text-[10px] uppercase tracking-luxe opacity-70">Gift card</span></div>
+      <div className="flex justify-between items-start"><span className="font-display text-3xl">Salon <em>Ché</em></span><span className="text-[10px] tracking-[0.02em] opacity-70">Gift card</span></div>
       <div>
         {f.toName && <p className="text-sm opacity-80">For {f.toName}</p>}
         <p className="font-display text-6xl md:text-7xl">${amt || 0}</p>
@@ -72,7 +72,7 @@ export default function GiftCardBuilder() {
           <div><label className="label" htmlFor="bn">Your name</label><input id="bn" className="input" value={f.buyerName} onChange={(e) => setF({ ...f, buyerName: e.target.value })} /></div>
           <div><label className="label" htmlFor="be">Your email</label><input id="be" type="email" className="input" value={f.buyerEmail} onChange={(e) => setF({ ...f, buyerEmail: e.target.value })} /></div>
         </div>
-        {err && <p role="alert" className="text-[#8a2f25]">{err}</p>}
+        {err && <p role="alert" className="text-danger">{err}</p>}
         <button className="btn-dark w-full" disabled={pending} onClick={() => start(async () => { setErr(""); const r = await buyGiftCard({ amount: amt, design, ...f }); r.ok ? setCode(r.code) : setErr(r.error); })}>{pending ? "Processing…" : `Buy gift card — $${amt || 0}`}</button>
         <p className="text-xs text-taupe text-center">🔒 Secure checkout by Stripe (demo mode: no real charge).</p>
         <div className="border-t border-sand pt-6">
