@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Monogram } from "./Logo";
 import { SALON } from "@/lib/content";
 
-const LEFT = [["/services", "Services"], ["/about", "Meet Lee"], ["/work", "Work"], ["/try-on", "Try-on"]];
+const LEFT = [["/services", "Services"], ["/about", "Meet Lee"], ["/work", "Work"], ["/looks", "Looks"], ["/try-on", "Try-on"]];
 const RIGHT = [["/shop", "Shop"], ["/gift-cards", "Gift cards"], ["/visit", "Visit"]];
 const EXTRA = [["/reviews", "Reviews"], ["/book/request", "After-hours request"], ["/book/waitlist", "Waitlist"], ["/policies", "Policies"], ["/features", "Features & pricing"]];
 

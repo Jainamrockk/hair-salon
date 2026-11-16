@@ -4,6 +4,7 @@ import FeatureTag from "@/components/FeatureTag";
 import Hero from "@/components/home/Hero";
 import { Reveal, SplitWords } from "@/components/ui/reveal";
 import HairSwatch from "@/components/hair/HairSwatch";
+import LookBook from "@/components/hair/LookBook";
 import { CATEGORIES, SALON, directionsUrl, mapEmbedUrl } from "@/lib/content";
 import { getHours, getServices, getSite, nextOpenings } from "@/lib/data";
 import { categoryPhoto, getPhotos, getReel, getWork } from "@/lib/photos";
@@ -94,6 +95,17 @@ export default async function Home() {
               <figcaption className="mt-3 text-sm text-taupe">{t}</figcaption>
             </figure>
           )))}
+        </div>
+      </section>
+
+      {/* The look book: the caricature cast */}
+      <section className="theme-pearl relative overflow-hidden">
+        <div className="container-x py-28">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div><p className="text-taupe">The look book</p><Reveal><h2 className="h2 mt-3 max-w-2xl">Meet the regulars.</h2></Reveal><p className="mt-4 text-taupe max-w-xl">Eight characters, eight signature cuts. Re-colour them with the shade chart — then try your favourite on your own photo.</p></div>
+            <div className="flex gap-3"><Link href="/looks" className="btn-dark">All twelve looks</Link><Link href="/try-on?mode=style" className="btn-ghost">Hairstyle try-on</Link></div>
+          </div>
+          <LookBook limit={8} compact />
         </div>
       </section>
 

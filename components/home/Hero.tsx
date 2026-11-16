@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { CursorSparkles } from "@/components/CursorSparkles";
-import HairStrands from "@/components/hair/HairStrands";
+import HairCanvas from "@/components/hair/HairCanvas";
 import { SplitText } from "@/components/ui/reveal";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -29,7 +29,7 @@ export default function Hero({ title, lead, shots, openings, tag }: { title: str
   return (
     <section ref={ref} className="relative min-h-[100svh] overflow-hidden pt-24">
       <div className="absolute inset-0 pin-spot" />
-      <HairStrands className="absolute inset-x-0 top-[18%] h-[70%] w-full opacity-70" />
+      <HairCanvas className="absolute inset-0 h-full w-full opacity-80" />
       <CursorSparkles />
 
       <div className="relative z-10 mx-auto grid min-h-[calc(100svh-6rem)] max-w-[1600px] items-center gap-10 px-5 pb-16 md:px-10 lg:grid-cols-[1.05fr_1fr]">
