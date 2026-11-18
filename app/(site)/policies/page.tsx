@@ -17,7 +17,7 @@ export default async function Policies() {
     ]],
     ["privacy", "Privacy", [
       "We keep your name, mobile number, email, visits and any notes, to book and look after your visits.",
-      "Try-on photos never leave your device — the preview is drawn in your browser. Saved looks keep only the shade you chose.",
+      "The live mirror and colour try-on run on your device; those photos never leave it. The photo-real AI try-on sends your photo to Google's Gemini AI only to create your preview — you agree to this first, and Salon Ché doesn't store it. Saved looks keep only the style you chose.",
       "Texts come from the salon's number. Reply STOP to any text to stop them.",
       "Payments are handled by Stripe. Salon Ché never sees your full card number.",
       "We don't sell your information or share it for advertising.",

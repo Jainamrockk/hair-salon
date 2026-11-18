@@ -11,6 +11,7 @@ export default async function Settings() {
     ["Database", process.env.DATABASE_URL ? "Neon Postgres connected" : "Embedded demo database (set DATABASE_URL)", !!process.env.DATABASE_URL],
     ["Text messages", process.env.TWILIO_ACCOUNT_SID ? "Twilio connected" : "Demo mode — add Twilio keys", !!process.env.TWILIO_ACCOUNT_SID],
     ["Payments", process.env.STRIPE_SECRET_KEY ? "Stripe connected" : "Demo mode — add Stripe keys", !!process.env.STRIPE_SECRET_KEY],
+    ["AI try-on", process.env.GEMINI_API_KEY ? "Gemini connected — photo-real haircuts on" : "Off — add GEMINI_API_KEY", !!process.env.GEMINI_API_KEY],
     ["AI assistant", process.env.ANTHROPIC_API_KEY ? "Claude connected" : "Built-in answers — add ANTHROPIC_API_KEY for full AI", !!process.env.ANTHROPIC_API_KEY],
   ] as const;
   return (
